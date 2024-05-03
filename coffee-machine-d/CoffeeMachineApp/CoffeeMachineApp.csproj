@@ -5,4 +5,8 @@
         <RootNamespace>CoffeeMachineApp</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="infrastructure\pricecatalog\" />
+    </ItemGroup>
+
 </Project>

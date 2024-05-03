@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using CoffeeMachineApp.core;
 
-namespace CoffeeMachineApp.core;
+namespace CoffeeMachineApp.infrastructure.pricecatalog;
 
 public class LocalPricesCatalog : PricesCatalog
 {
