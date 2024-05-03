@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoffeeMachineApp.core;
+﻿using CoffeeMachineApp.core;
 
 namespace CoffeeMachineApp.infrastructure.pricecatalog {
     public class WebPricesCatalog : PricesCatalog {
