@@ -214,12 +214,12 @@ public class CoffeeMachineTest
             { DrinkType.Coffee, 0 },
             { DrinkType.Tea, 0 }
         };
-        return new CoffeeMachine(_drinkMakerDriver, prices, _notifier);
+        return new CoffeeMachine(_drinkMakerDriver, _notifier, new LocalPricesCatalog(prices));
     }
     private CoffeeMachine PaidCoffeeMachine()
     {
         var prices = _pricesByDrinkType;
-        return new CoffeeMachine(_drinkMakerDriver, prices, _notifier);
+        return new CoffeeMachine(_drinkMakerDriver, _notifier, new LocalPricesCatalog(prices));
     }
 
     private List<Order> CaptureSentOrders()

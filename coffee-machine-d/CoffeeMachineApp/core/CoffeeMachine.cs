@@ -10,12 +10,11 @@ public class CoffeeMachine
     private decimal _totalMoney;
     private readonly PricesCatalog _pricesCatalog;
 
-    public CoffeeMachine(DrinkMakerDriver drinkMakerDriver, Dictionary<DrinkType, decimal> prices,
-        Notifier notifier)
+    public CoffeeMachine(DrinkMakerDriver drinkMakerDriver, Notifier notifier, PricesCatalog pricesCatalog)
     {
         _drinkMakerDriver = drinkMakerDriver;
         _notifier = notifier;
-        _pricesCatalog = new LocalPricesCatalog(prices);
+        _pricesCatalog = pricesCatalog;
         InitializeState();
     }
 
