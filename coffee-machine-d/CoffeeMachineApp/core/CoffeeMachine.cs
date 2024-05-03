@@ -86,18 +86,3 @@ public class CoffeeMachine
         return _order.GetDrinkType() == DrinkType.None;
     }
 }
-
-public class LocalPricesCatalog
-{
-    private readonly Dictionary<DrinkType, decimal> _prices;
-
-    public LocalPricesCatalog(Dictionary<DrinkType, decimal> prices)
-    {
-        _prices = prices;
-    }
-
-    public decimal GetPrice(DrinkType drinkType)
-    {
-        return _prices[drinkType];
-    }
-}
