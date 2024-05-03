@@ -73,17 +73,12 @@ public class CoffeeMachine
 
     private decimal ComputeMissingMoney()
     {
-        return GetPrice(_order.GetDrinkType()) - _totalMoney;
+        return _pricesCatalog.GetPrice(_order.GetDrinkType()) - _totalMoney;
     }
 
     private bool IsThereEnoughMoney()
     {
-        return _totalMoney >= GetPrice(_order.GetDrinkType());
-    }
-
-    private decimal GetPrice(DrinkType drinkType)
-    {
-        return _prices[drinkType];
+        return _totalMoney >= _pricesCatalog.GetPrice(_order.GetDrinkType());
     }
 
     private bool NoDrinkWasSelected()
@@ -99,5 +94,10 @@ public class LocalPricesCatalog
     public LocalPricesCatalog(Dictionary<DrinkType, decimal> prices)
     {
         _prices = prices;
+    }
+
+    public decimal GetPrice(DrinkType drinkType)
+    {
+        return _prices[drinkType];
     }
 }
