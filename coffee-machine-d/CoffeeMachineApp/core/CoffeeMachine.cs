@@ -9,6 +9,7 @@ public class CoffeeMachine
     private readonly Notifier _notifier;
     private Order _order;
     private decimal _totalMoney;
+    private readonly LocalPricesCatalog _pricesCatalog;
 
     public CoffeeMachine(DrinkMakerDriver drinkMakerDriver, Dictionary<DrinkType, decimal> prices,
         Notifier notifier)
@@ -16,6 +17,7 @@ public class CoffeeMachine
         _drinkMakerDriver = drinkMakerDriver;
         _prices = prices;
         _notifier = notifier;
+        _pricesCatalog = new LocalPricesCatalog(prices);
         InitializeState();
     }
 
@@ -71,16 +73,31 @@ public class CoffeeMachine
 
     private decimal ComputeMissingMoney()
     {
-        return _prices[_order.GetDrinkType()] - _totalMoney;
+        return GetPrice(_order.GetDrinkType()) - _totalMoney;
     }
 
     private bool IsThereEnoughMoney()
     {
-        return _totalMoney >= _prices[_order.GetDrinkType()];
+        return _totalMoney >= GetPrice(_order.GetDrinkType());
+    }
+
+    private decimal GetPrice(DrinkType drinkType)
+    {
+        return _prices[drinkType];
     }
 
     private bool NoDrinkWasSelected()
     {
         return _order.GetDrinkType() == DrinkType.None;
+    }
+}
+
+public class LocalPricesCatalog
+{
+    private readonly Dictionary<DrinkType, decimal> _prices;
+
+    public LocalPricesCatalog(Dictionary<DrinkType, decimal> prices)
+    {
+        _prices = prices;
     }
 }
