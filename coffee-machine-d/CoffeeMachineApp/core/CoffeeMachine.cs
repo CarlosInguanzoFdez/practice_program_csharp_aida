@@ -5,17 +5,15 @@ namespace CoffeeMachineApp.core;
 public class CoffeeMachine
 {
     private readonly DrinkMakerDriver _drinkMakerDriver;
-    private readonly Dictionary<DrinkType, decimal> _prices;
     private readonly Notifier _notifier;
     private Order _order;
     private decimal _totalMoney;
-    private readonly LocalPricesCatalog _pricesCatalog;
+    private readonly PricesCatalog _pricesCatalog;
 
     public CoffeeMachine(DrinkMakerDriver drinkMakerDriver, Dictionary<DrinkType, decimal> prices,
         Notifier notifier)
     {
         _drinkMakerDriver = drinkMakerDriver;
-        _prices = prices;
         _notifier = notifier;
         _pricesCatalog = new LocalPricesCatalog(prices);
         InitializeState();
