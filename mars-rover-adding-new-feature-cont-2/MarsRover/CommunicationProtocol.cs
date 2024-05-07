@@ -5,10 +5,15 @@ namespace MarsRover;
 
 public abstract class CommunicationProtocol
 {
-    public List<Command> CreateCommands(string commandsSequence, int displacement)
-    {
-        return commandsSequence
-            .Select(char.ToString)
+    private readonly CommandExtractor _commandExtractor;
+
+    protected CommunicationProtocol(CommandExtractor commandExtractor) {
+        _commandExtractor = commandExtractor;
+    }
+
+    public List<Command> CreateCommands(string commandsSequence, int displacement) {
+        var commandRepresentations = _commandExtractor.Extract(commandsSequence);
+        return commandRepresentations
             .Select(commandRepresentation => CreateCommand(displacement, commandRepresentation))
             .ToList();
     }

@@ -4,6 +4,10 @@ namespace MarsRover.communicationProtocols;
 
 public class EsaCommunicationProtocol : CommunicationProtocol
 {
+    public EsaCommunicationProtocol() : base(new CommandExtractor(1)) {
+
+    }
+
     protected override Command CreateCommand(int displacement, string commandRepresentation)
     {
         Command command;
