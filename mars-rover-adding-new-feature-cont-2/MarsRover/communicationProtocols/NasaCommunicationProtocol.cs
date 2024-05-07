@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using MarsRover.commands;
 
@@ -6,15 +5,7 @@ namespace MarsRover.communicationProtocols;
 
 public class NasaCommunicationProtocol : CommunicationProtocol
 {
-    public List<Command> CreateCommands(string commandsSequence, int displacement)
-    {
-        return commandsSequence
-            .Select(char.ToString)
-            .Select(commandRepresentation => CreateCommand(displacement, commandRepresentation))
-            .ToList();
-    }
-
-    private Command CreateCommand(int displacement, string commandRepresentation)
+    protected override Command CreateCommand(int displacement, string commandRepresentation)
     {
         switch (commandRepresentation)
         {
