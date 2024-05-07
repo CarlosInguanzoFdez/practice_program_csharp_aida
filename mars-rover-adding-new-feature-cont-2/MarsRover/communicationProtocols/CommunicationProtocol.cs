@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MarsRover;
+namespace MarsRover.communicationProtocols;
 
 public abstract class CommunicationProtocol
 {

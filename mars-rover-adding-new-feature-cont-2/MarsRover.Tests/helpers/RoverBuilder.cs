@@ -44,4 +44,9 @@ public class RoverBuilder
     {
         return new RoverBuilder(0, 0, "N", new EsaCommunicationProtocol());
     }
+
+    public static RoverBuilder ACNSARover()
+    {
+        return new RoverBuilder(0, 0, "N", new CnsaCommunicationProtocol());
+    }
 }

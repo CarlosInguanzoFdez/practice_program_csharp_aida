@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,6 @@ public class CommandExtractor {
     public List<string> Extract(string commandsSequence) {
         return commandsSequence
             .Chunk((int)_length)
-            .Select(arr => arr[0].ToString()).ToList();
+            .Select(arr => string.Join("", arr)) .ToList();
     }
 }
