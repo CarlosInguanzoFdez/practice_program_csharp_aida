@@ -55,4 +55,13 @@ public abstract class RoverUsingCommunicationProtocolTest
 
         Assert.That(rover, Is.EqualTo(GetRoverBuilder().Facing("N").Build()));
     }
+
+    [Test]
+    public void Several_Commands() {
+        var rover = GetRoverBuilder().WithCoordinates(2, 2).Facing("W").Build();
+
+        rover.Receive(GetForwardCommandRepresentation()+ GetRotateLeftCommandRepresentation() + GetRotateRightCommandRepresentation() + GetBackwardCommandRepresentation());
+
+        Assert.That(rover, Is.EqualTo(GetRoverBuilder().WithCoordinates(2, 2).Facing("W").Build()));
+    }
 }

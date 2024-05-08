@@ -6,16 +6,6 @@ namespace MarsRover.Tests;
 
 public class RoverUsingCnsaCommunicationProtocolTest : RoverUsingCommunicationProtocolTest
 {
-    [Test]
-    public void Two_Commands()
-    {
-        var rover = GetRoverBuilder().Facing("W").Build();
-
-        rover.Receive("ahpl");
-
-        Assert.That(rover, Is.EqualTo(GetRoverBuilder().Facing("W").Build()));
-    }
-
     protected override RoverBuilder GetRoverBuilder()
     {
         return CsnaRover();

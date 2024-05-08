@@ -7,16 +7,6 @@ namespace MarsRover.Tests;
 public class RoverUsingEsaCommunicationProtocolTest : RoverUsingCommunicationProtocolTest
 {
     
-    [Test]
-    public void Two_Commands()
-    {
-        var rover = GetRoverBuilder().Facing("W").Build();
-
-        rover.Receive("lf");
-
-        Assert.That(rover, Is.EqualTo(GetRoverBuilder().Facing("W").Build()));
-    }
-
     protected override RoverBuilder GetRoverBuilder()
     {
         return EsaRover();
