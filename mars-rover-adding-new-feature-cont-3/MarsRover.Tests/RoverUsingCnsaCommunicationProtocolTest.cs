@@ -4,7 +4,7 @@ using static MarsRover.Tests.helpers.RoverBuilder;
 
 namespace MarsRover.Tests;
 
-public class RoverUsingCnsaCommunicationProtocolTest
+public class RoverUsingCnsaCommunicationProtocolTest : RoverUsingCommunicationProtocolTest
 {
     [Test]
     public void No_Commands()
@@ -66,27 +66,27 @@ public class RoverUsingCnsaCommunicationProtocolTest
         Assert.That(rover, Is.EqualTo(GetRoverBuilder().Facing("W").Build()));
     }
 
-    private RoverBuilder GetRoverBuilder()
+    protected override RoverBuilder GetRoverBuilder()
     {
         return CsnaRover();
     }
 
-    private string GetForwardCommandRepresentation()
+    protected override string GetForwardCommandRepresentation()
     {
         return "bx";
     }
 
-    private string GetBackwardCommandRepresentation()
+    protected override string GetBackwardCommandRepresentation()
     {
         return "tf";
     }
 
-    private string GetRotateRightCommandRepresentation()
+    protected override string GetRotateRightCommandRepresentation()
     {
         return "pl";
     }
 
-    private string GetRotateLeftCommandRepresentation()
+    protected override string GetRotateLeftCommandRepresentation()
     {
         return "ah";
     }
