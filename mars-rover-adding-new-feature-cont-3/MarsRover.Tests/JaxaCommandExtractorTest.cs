@@ -14,11 +14,11 @@ namespace MarsRover.Tests {
         //Lista de test
         // "" -> Lista vacía - Ok
         // "a" -> Lista vacía - Ok
-        // "ab" -> Lista vacía
+        // "ab" -> Lista vacía - OK
         // "at" -> ["at"] - Ok
         // "iz" -> ["iz"] - Ok
         // "abc" -> Lista vacía
-        // "del" -> ["del"]
+        // "del" -> ["del"] - Ok
         // "der" -> ["der"]
         // "adel" -> Lista vacía
         // "atdel" -> ["at","del"]
@@ -39,6 +39,8 @@ namespace MarsRover.Tests {
 
         [TestCase("at")]
         [TestCase("iz")]
+        [TestCase("del")]
+        [TestCase("der")]
         public void extract_from_sequence_with_one_jaxa_command(string command) {
             var result = commandExtractor.Extract(command);
 
