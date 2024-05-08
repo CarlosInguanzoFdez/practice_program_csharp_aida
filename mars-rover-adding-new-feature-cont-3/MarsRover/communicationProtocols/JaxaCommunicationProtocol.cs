@@ -19,6 +19,11 @@ public class JaxaCommunicationProtocol : CommunicationProtocol
         {
             return new RotationLeft();
         }
+
+        if (commandRepresentation == "der")
+        {
+            return new RotationRight();
+        }
         
         return new MovementForward(displacement);
     }
