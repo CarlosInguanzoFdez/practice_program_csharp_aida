@@ -1,4 +1,5 @@
 using MarsRover.commands;
+using MarsRover.communicationProtocols.commandExtractor;
 
 namespace MarsRover.communicationProtocols;
 

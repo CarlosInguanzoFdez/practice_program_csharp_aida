@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MarsRover.communicationProtocols;
+using MarsRover.communicationProtocols.commandExtractor;
 using NUnit.Framework;
 
 namespace MarsRover.Tests;

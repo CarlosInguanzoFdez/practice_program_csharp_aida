@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MarsRover.communicationProtocols;
+namespace MarsRover.communicationProtocols.commandExtractor;
 
 public class FixedLengthCommandExtractor : CommandExtractor
 {
