@@ -20,4 +20,9 @@ public record Coordinates
     {
         return new Coordinates(_x + displacement, _y);
     }
+
+    public override string ToString()
+    {
+        return $"{nameof(_x)}: {_x}, {nameof(_y)}: {_y}";
+    }
 }
