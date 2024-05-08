@@ -86,6 +86,12 @@ namespace MarsRover.Tests {
             Assert.That(result, Is.EqualTo(new List<string> { "at", "del" }));
         }
 
+        [Test]
+        public void extract_from_sequence_with_one_jaxa_command_and_trash_at_the_beginning()
+        {
+            var result = commandExtractor.Extract("adel");
 
+            Assert.That(result, Is.EqualTo(new List<string> { }));
+        }
     }
 }
