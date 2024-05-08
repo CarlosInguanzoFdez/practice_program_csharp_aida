@@ -4,7 +4,7 @@ namespace MarsRover.communicationProtocols;
 
 public class NasaCommunicationProtocol : CommunicationProtocol
 {
-    public NasaCommunicationProtocol() : base(new ChunkCommandExtractor(1))
+    public NasaCommunicationProtocol() : base(new FixedLengthCommandExtractor(1))
     {
     }
 

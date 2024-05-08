@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace MarsRover.communicationProtocols;
 
-public class ChunkCommandExtractor : CommandExtractor
+public class FixedLengthCommandExtractor : CommandExtractor
 {
     private readonly uint _length;
 
-    public ChunkCommandExtractor(uint length) {
+    public FixedLengthCommandExtractor(uint length) {
         _length = length;
     }
 
