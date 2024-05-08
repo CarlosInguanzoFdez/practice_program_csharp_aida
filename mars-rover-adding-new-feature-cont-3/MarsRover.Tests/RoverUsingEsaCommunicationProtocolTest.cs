@@ -1,67 +1,44 @@
+using MarsRover.Tests.helpers;
 using NUnit.Framework;
 using static MarsRover.Tests.helpers.RoverBuilder;
 
 namespace MarsRover.Tests;
 
-public class RoverUsingEsaCommunicationProtocolTest
+public class RoverUsingEsaCommunicationProtocolTest : RoverUsingCommunicationProtocolTest
 {
-    [Test]
-    public void No_Commands()
-    {
-        var rover = EsaRover().Build();
-
-        rover.Receive("");
-
-        Assert.That(rover, Is.EqualTo(EsaRover().Build()));
-    }
-
-    [Test]
-    public void Forward_Commands()
-    {
-        var rover = EsaRover().WithCoordinates(0, 0).Facing("N").Build();
-
-        rover.Receive("b");
-
-        Assert.That(rover, Is.EqualTo(EsaRover().WithCoordinates(0, 1).Facing("N").Build()));
-    }
-
-    [Test]
-    public void Backward_Commands()
-    {
-        var rover = EsaRover().WithCoordinates(3, 3).Facing("E").Build();
-
-        rover.Receive("x");
-
-        Assert.That(rover, Is.EqualTo(EsaRover().WithCoordinates(2, 3).Facing("E").Build()));
-    }
-
-    [Test]
-    public void Rotate_Left_Commands()
-    {
-        var rover = EsaRover().Facing("E").Build();
-
-        rover.Receive("f");
-
-        Assert.That(rover, Is.EqualTo(EsaRover().Facing("N").Build()));
-    }
-
-    [Test]
-    public void Rotate_Right_Commands()
-    {
-        var rover = EsaRover().Facing("W").Build();
-
-        rover.Receive("l");
-
-        Assert.That(rover, Is.EqualTo(EsaRover().Facing("N").Build()));
-    }
-
+    
     [Test]
     public void Two_Commands()
     {
-        var rover = EsaRover().Facing("W").Build();
+        var rover = GetRoverBuilder().Facing("W").Build();
 
         rover.Receive("lf");
 
-        Assert.That(rover, Is.EqualTo(EsaRover().Facing("W").Build()));
+        Assert.That(rover, Is.EqualTo(GetRoverBuilder().Facing("W").Build()));
+    }
+
+    protected override RoverBuilder GetRoverBuilder()
+    {
+        return EsaRover();
+    }
+
+    protected override string GetForwardCommandRepresentation()
+    {
+        return "b";
+    }
+
+    protected override string GetBackwardCommandRepresentation()
+    {
+        return "x";
+    }
+
+    protected override string GetRotateRightCommandRepresentation()
+    {
+        return "l";
+    }
+
+    protected override string GetRotateLeftCommandRepresentation()
+    {
+        return "f";
     }
 }
