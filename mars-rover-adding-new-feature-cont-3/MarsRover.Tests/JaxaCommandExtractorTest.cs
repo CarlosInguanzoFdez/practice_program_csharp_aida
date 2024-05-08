@@ -9,10 +9,11 @@ using MarsRover.communicationProtocols.commandExtractor;
 
 namespace MarsRover.Tests {
     public class JaxaCommandExtractorTest {
+        private CommandExtractor commandExtractor;
 
         //Lista de test
-        // "" -> Lista vacía
-        // "a" -> Lista vacía
+        // "" -> Lista vacía - Ok
+        // "a" -> Lista vacía - Ignored
         // "ab" -> Lista vacía
         // "at" -> ["at"]
         // "iz" -> ["iz"]
@@ -24,15 +25,30 @@ namespace MarsRover.Tests {
         // "dela" -> ["del"]
         // "atdelder" -> ["at","del","der"]
         // "atdelader" -> ["at","del"]
-
+        [SetUp]
+        public void SetUp() {
+            commandExtractor = new JaxaCommandExtractor();
+        }
 
         [Test]
-        public void extract_commands_without_commands() {
-            var commandExtractor = new JaxaCommandExtractor();
-
+        public void extract_from_empty_sequence() {
             var result = commandExtractor.Extract("");
 
             Assert.That(result, Is.EqualTo(new List<string> {}));
+        }
+
+        [TestCase("at")]
+        public void extract_from_sequence_with_one_jaxa_command(string command) {
+            var result = commandExtractor.Extract(command);
+
+            Assert.That(result, Is.EqualTo(new List<string> { command }));
+        }
+
+        [Test]
+        public void extract_from_sequence_with_not_jaxa_commands() {
+            var result = commandExtractor.Extract("a");
+
+            Assert.That(result, Is.EqualTo(new List<string> { }));
         }
 
     }
