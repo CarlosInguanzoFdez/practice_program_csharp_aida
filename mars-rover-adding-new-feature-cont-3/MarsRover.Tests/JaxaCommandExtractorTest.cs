@@ -21,8 +21,8 @@ namespace MarsRover.Tests {
         // "del" -> ["del"] - Ok
         // "der" -> ["der"] - Ok
         // "adel" -> Lista vacía
-        // "atdel" -> ["at","del"]
-        // "dela" -> ["del"]
+        // "atdel" -> ["at","del"] - Ok
+        // "dela" -> ["del"] - Ok
         // "atdelder" -> ["at","del","der"]
         // "atdelader" -> ["at","del"]
         [SetUp]
@@ -71,12 +71,11 @@ namespace MarsRover.Tests {
         }
 
         [Test]
-        [Ignore("")]
         public void extract_from_sequence_with_one_jaxa_command_and_trash()
         {
             var result = commandExtractor.Extract("dela");
 
-            Assert.That(result, Is.EqualTo(new List<string> { }));
+            Assert.That(result, Is.EqualTo(new List<string> { "del"}));
         }
 
 

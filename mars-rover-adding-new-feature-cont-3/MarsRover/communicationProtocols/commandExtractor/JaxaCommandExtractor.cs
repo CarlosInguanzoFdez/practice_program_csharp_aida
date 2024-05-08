@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MarsRover.communicationProtocols.commandExtractor;
 
@@ -9,22 +10,20 @@ public class JaxaCommandExtractor : CommandExtractor {
             return new List<string>();
         }
 
-        if (commandsSequence == "atdel")
+        var consumedSequence = "";
+        var commands = new List<string>();
+        foreach (var ch in commandsSequence)
         {
-            return new List<string>
+            consumedSequence += ch;
+
+            if (consumedSequence == "iz" || consumedSequence == "at" || consumedSequence == "del" ||
+                consumedSequence == "der")
             {
-                "at",
-                "del"
-            };
+                commands.Add(consumedSequence);
+                consumedSequence = "";
+            }
         }
 
-        if (commandsSequence == "iz" || commandsSequence == "at" 
-                                     || commandsSequence == "del" 
-                                     || commandsSequence == "der")
-        {
-            return new List<string> { commandsSequence };
-        }
-
-        return new List<string>();
+        return commands;
     }
 }
