@@ -14,7 +14,13 @@ public class JaxaCommunicationProtocol : CommunicationProtocol
         if (commandRepresentation == "at") {
             return new MovementBackward(displacement);
         }
+
+        if (commandRepresentation == "iz")
+        {
+            return new RotationLeft();
+        }
         
         return new MovementForward(displacement);
     }
+
 }

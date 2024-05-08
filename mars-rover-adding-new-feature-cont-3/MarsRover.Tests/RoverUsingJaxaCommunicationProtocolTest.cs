@@ -34,5 +34,14 @@ namespace MarsRover.Tests
 
             Assert.That(rover, Is.EqualTo(JaxaRover().WithCoordinates(2, 3).Facing("E").Build()));
         }
+
+        [Test]
+        public void Rotate_Left_Commands() {
+            var rover = JaxaRover().Facing("E").Build();
+
+            rover.Receive("iz");
+
+            Assert.That(rover, Is.EqualTo(JaxaRover().Facing("N").Build()));
+        }
     }
 }
