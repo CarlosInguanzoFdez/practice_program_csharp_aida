@@ -8,6 +8,11 @@ public class NasaCommunicationProtocol : CommunicationProtocol
     {
     }
 
+    public NasaCommunicationProtocol(CommandExtractor commandExtractor) : base(commandExtractor)
+    {
+        
+    }
+
     protected override Command CreateCommand(int displacement, string commandRepresentation)
     {
         return commandRepresentation switch
