@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace MarsRover.Tests;
 
 [TestFixture]
-public class CommandExtractorTest
+public class ChunkCommandExtractorTest
 {
 
     [Test]
@@ -28,8 +28,8 @@ public class CommandExtractorTest
         Assert.That(result, Is.EqualTo(new List<string> { "ab", "c" }));
     }
 
-    private static CommandExtractor CreateCommandExtractorForCommandsOfSize(uint size)
+    private static ChunkCommandExtractor CreateCommandExtractorForCommandsOfSize(uint size)
     {
-        return new CommandExtractor(size);
+        return new ChunkCommandExtractor(size);
     }
 }

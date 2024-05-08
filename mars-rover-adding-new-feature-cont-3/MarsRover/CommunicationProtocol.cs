@@ -6,14 +6,14 @@ namespace MarsRover;
 
 public abstract class CommunicationProtocol
 {
-    private readonly CommandExtractor _commandExtractor;
+    private readonly ChunkCommandExtractor _chunkCommandExtractor;
 
-    protected CommunicationProtocol(CommandExtractor commandExtractor) {
-        _commandExtractor = commandExtractor;
+    protected CommunicationProtocol(ChunkCommandExtractor chunkCommandExtractor) {
+        _chunkCommandExtractor = chunkCommandExtractor;
     }
 
     public List<Command> CreateCommands(string commandsSequence, int displacement) {
-        var commandRepresentations = _commandExtractor.Extract(commandsSequence);
+        var commandRepresentations = _chunkCommandExtractor.Extract(commandsSequence);
         return commandRepresentations
             .Select(commandRepresentation => CreateCommand(displacement, commandRepresentation))
             .ToList();
