@@ -9,6 +9,15 @@ public class JaxaCommandExtractor : CommandExtractor {
             return new List<string>();
         }
 
+        if (commandsSequence == "atdel")
+        {
+            return new List<string>
+            {
+                "at",
+                "del"
+            };
+        }
+
         if (commandsSequence == "iz" || commandsSequence == "at" 
                                      || commandsSequence == "del" 
                                      || commandsSequence == "der")
