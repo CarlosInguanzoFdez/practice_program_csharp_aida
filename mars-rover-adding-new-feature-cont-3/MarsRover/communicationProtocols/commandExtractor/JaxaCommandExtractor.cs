@@ -9,6 +9,11 @@ public class JaxaCommandExtractor : CommandExtractor {
             return new List<string>();
         }
 
-        return new List<string> { "at" };
+        if (commandsSequence == "iz" || commandsSequence == "at")
+        {
+            return new List<string> { commandsSequence };
+        }
+
+        return new List<string>();
     }
 }
