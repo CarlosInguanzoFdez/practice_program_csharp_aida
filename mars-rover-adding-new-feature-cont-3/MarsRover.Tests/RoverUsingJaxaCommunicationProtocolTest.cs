@@ -1,65 +1,39 @@
-﻿using NUnit.Framework;
+﻿using MarsRover.Tests.helpers;
+using NUnit.Framework;
 using static MarsRover.Tests.helpers.RoverBuilder;
 
 namespace MarsRover.Tests
 {
-    public class RoverUsingJaxaCommunicationProtocolTest
+    public class RoverUsingJaxaCommunicationProtocolTest : RoverUsingCommunicationProtocolTest
     {
-        [Test]
-        public void No_Commands()
-        {
-            var rover = JaxaRover().Build();
-
-            rover.Receive("");
-
-            Assert.That(rover, Is.EqualTo(JaxaRover().Build()));
-        }
-
-        [Test]
-        public void Forward_Commands()
-        {
-            var rover = JaxaRover().WithCoordinates(0, 0).Facing("N").Build();
-
-            rover.Receive("del");
-
-            Assert.That(rover, Is.EqualTo(JaxaRover().WithCoordinates(0, 1).Facing("N").Build()));
-        }
-
-        [Test]
-        public void Backward_Commands()
-        {
-            var rover = JaxaRover().WithCoordinates(3, 3).Facing("E").Build();
-
-            rover.Receive("at");
-
-            Assert.That(rover, Is.EqualTo(JaxaRover().WithCoordinates(2, 3).Facing("E").Build()));
-        }
-
-        [Test]
-        public void Rotate_Left_Commands() {
-            var rover = JaxaRover().Facing("E").Build();
-
-            rover.Receive("iz");
-
-            Assert.That(rover, Is.EqualTo(JaxaRover().Facing("N").Build()));
-        }
-
-        [Test]
-        public void Rotate_Right_Commands() {
-            var rover = JaxaRover().Facing("W").Build();
-
-            rover.Receive("der");
-
-            Assert.That(rover, Is.EqualTo(JaxaRover().Facing("N").Build()));
-        }
 
         [Test]
         public void Two_Commands() {
-            var rover = JaxaRover().Facing("W").WithCoordinates(5,5).Build();
+            var rover = GetRoverBuilder().Facing("W").WithCoordinates(5,5).Build();
 
             rover.Receive("derat");
 
-            Assert.That(rover, Is.EqualTo(JaxaRover().Facing("N").WithCoordinates(5,4).Build()));
+            Assert.That(rover, Is.EqualTo(GetRoverBuilder().Facing("N").WithCoordinates(5,4).Build()));
+        }
+
+        protected override RoverBuilder GetRoverBuilder() {
+            return JaxaRover();
+        }
+
+        protected override string GetForwardCommandRepresentation() {
+            return "del";
+        }
+
+        protected override string GetBackwardCommandRepresentation() {
+            return "at";
+        }
+
+        protected override string GetRotateRightCommandRepresentation() {
+            return "der";
+        }
+
+        protected override string GetRotateLeftCommandRepresentation() {
+            return "iz";
         }
     }
 }
