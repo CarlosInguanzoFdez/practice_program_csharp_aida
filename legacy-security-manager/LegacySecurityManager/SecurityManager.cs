@@ -2,13 +2,13 @@ namespace LegacySecurityManager;
 
 public class SecurityManager
 {
-    private Notifier _consoleNotifier;
-    private readonly Reader _consoleReader;
+    private readonly Notifier _notifier;
+    private readonly Reader _reader;
 
-    public SecurityManager(Notifier consoleNotifier, Reader consoleReader)
+    public SecurityManager(Notifier notifier, Reader reader)
     {
-        _consoleNotifier = consoleNotifier;
-        _consoleReader = consoleReader;
+        _notifier = notifier;
+        _reader = reader;
     }
 
     public static void CreateUser()
@@ -65,11 +65,11 @@ public class SecurityManager
 
     protected virtual string ReadMessage()
     {
-        return _consoleReader.Read();
+        return _reader.Read();
     }
 
     protected virtual void Print(string message)
     {
-        _consoleNotifier.Notify(message);
+        _notifier.Notify(message);
     }
 }

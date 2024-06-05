@@ -1,19 +1,24 @@
 using LegacySecurityManager;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace LegacySecurityManager.Tests
 {
     public class SecurityManagerTest
     {
+        private Notifier _notifier;
+
+
         [Test]
-        public void password_and_confirm_password_are_not_equals_show_error()
-        {
-            var inputs = new List<string>() { "Carlos", "Carlos Inguanzo", "password", "notEqualsPassword" };
-            var securityManager = new SecurityManagerForTesting(inputs);
+        public void password_and_confirm_password_are_not_equals_show_error() {
+            _notifier = Substitute.For<Notifier>();
+            var reader = Substitute.For<Reader>();
+            reader.Read().Returns("Carlos", "Carlos Inguanzo", "password", "notEqualsPassword");
+            var securityManager = new SecurityManager(_notifier, reader);
 
             securityManager.CreateUserInstance();
 
-            AssertThatLastMessageIs("The passwords don't match", securityManager);
+            AssertThatLastMessageIsNew("The passwords don't match");
         }
 
         [Test]
@@ -41,6 +46,13 @@ namespace LegacySecurityManager.Tests
         {
             var expectedMessages = GetExpectedMessages(lastMessage);
             Assert.That(securityManager.PrintedMessages, Is.EquivalentTo(expectedMessages));
+        }
+        private void AssertThatLastMessageIsNew(string lastMessage) {
+            _notifier.Received(1).Notify("Enter a username");
+            _notifier.Received(1).Notify("Enter your full name");
+            _notifier.Received(1).Notify("Enter your password");
+            _notifier.Received(1).Notify("Re-enter your password");
+            _notifier.Received(1).Notify(lastMessage);
         }
 
         private List<string> GetExpectedMessages(string lastMessage)
