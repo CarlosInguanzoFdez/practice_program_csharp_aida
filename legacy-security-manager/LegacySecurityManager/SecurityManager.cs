@@ -12,13 +12,13 @@ public class SecurityManager
     public void CreateUserInstance()
     {
         Print("Enter a username");
-        var username = Console.ReadLine();
+        var username = ReadMessage();
         Print("Enter your full name");
-        var fullName = Console.ReadLine();
+        var fullName = ReadMessage();
         Print("Enter your password");
-        var password = Console.ReadLine();
+        var password = ReadMessage();
         Print("Re-enter your password");
-        var confirmPassword = Console.ReadLine();
+        var confirmPassword = ReadMessage();
 
         if (password != confirmPassword)
         {
@@ -37,6 +37,10 @@ public class SecurityManager
         Array.Reverse(array);
 
         Print($"Saving Details for User ({username}, {fullName}, {new string(array)})\n");
+    }
+    protected virtual string ReadMessage()
+    {
+        return Console.ReadLine();
     }
 
     protected virtual void Print(string message)
