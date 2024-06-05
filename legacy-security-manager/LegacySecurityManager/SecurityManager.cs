@@ -38,6 +38,7 @@ public class SecurityManager
 
         Print($"Saving Details for User ({username}, {fullName}, {new string(array)})\n");
     }
+
     protected virtual string ReadMessage()
     {
         return Console.ReadLine();
