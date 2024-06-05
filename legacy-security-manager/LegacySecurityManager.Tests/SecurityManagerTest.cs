@@ -54,7 +54,7 @@ namespace LegacySecurityManager.Tests
         private readonly Queue<string> _inputs;
         public List<string> PrintedMessages;
 
-        public SecurityManagerForTesting(List<string> inputs)
+        public SecurityManagerForTesting(List<string> inputs) : base(new ConsoleNotifier(), new ConsoleReader())
         {
             _inputs = new Queue<string>(inputs);
             PrintedMessages = new List<string>();
