@@ -19,12 +19,22 @@ namespace LegacySecurityManager.Tests
         [Test]
         public void password_less_than_8_characters_show_error()
         {
-            var inputs = new List<string>() { "Raúl", "Corchero", "passwo", "passwo" };
+            var inputs = new List<string>() { "Raúl", "Corchero", "passwor", "passwor" };
             var securityManager = new SecurityManagerForTesting(inputs);
 
             securityManager.CreateUserInstance();
 
             AssertThatLastMessageIs("Password must be at least 8 characters in length", securityManager);
+        }
+
+        [Test]
+        public void create_user_show_saving_details_message() {
+            var inputs = new List<string>() { "Manuel", "Gallud", "password", "password" };
+            var securityManager = new SecurityManagerForTesting(inputs);
+
+            securityManager.CreateUserInstance();
+
+            AssertThatLastMessageIs("Saving Details for User (Manuel, Gallud, drowssap)\n", securityManager);
         }
 
         private void AssertThatLastMessageIs(string lastMessage, SecurityManagerForTesting securityManager)
