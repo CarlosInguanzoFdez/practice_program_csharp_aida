@@ -16,6 +16,18 @@ namespace LegacySecurityManager.Tests
             var expectedMessages = new List<string>(){ "Enter a username", "Enter your full name", "Enter your password", "Re-enter your password", "The passwords don't match" };
             Assert.That(securityManager.PrintedMessages, Is.EquivalentTo(expectedMessages));
         }
+
+        [Test]
+        public void password_less_than_8_characters_show_error()
+        {
+            var inputs = new List<string>() { "userName", "fullName", "passwo", "passwo" };
+            var securityManager = new SecurityManagerForTesting(inputs);
+
+            securityManager.CreateUserInstance();
+
+            var expectedMessages = new List<string>() { "Enter a username", "Enter your full name", "Enter your password", "Re-enter your password", "Password must be at least 8 characters in length" };
+            Assert.That(securityManager.PrintedMessages, Is.EquivalentTo(expectedMessages));
+        }
     }
 
     internal class SecurityManagerForTesting : SecurityManager
