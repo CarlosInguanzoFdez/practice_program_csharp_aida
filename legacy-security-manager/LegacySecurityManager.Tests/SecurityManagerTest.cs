@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using LegacySecurityManager;
 using NSubstitute;
 using NUnit.Framework;
@@ -48,11 +49,14 @@ namespace LegacySecurityManager.Tests
         }
 
         private void AssertThatLastMessageIs(string lastMessage) {
-            _notifier.Received(1).Notify("Enter a username");
-            _notifier.Received(1).Notify("Enter your full name");
-            _notifier.Received(1).Notify("Enter your password");
-            _notifier.Received(1).Notify("Re-enter your password");
-            _notifier.Received(1).Notify(lastMessage);
+            Received.InOrder(() =>
+            {
+                _notifier.Received(1).Notify("Enter a username");
+                _notifier.Received(1).Notify("Enter your full name");
+                _notifier.Received(1).Notify("Enter your password");
+                _notifier.Received(1).Notify("Re-enter your password");
+                _notifier.Received(1).Notify(lastMessage);
+            });
         }
     }
 }
