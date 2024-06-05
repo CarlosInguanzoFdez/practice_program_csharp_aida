@@ -8,25 +8,34 @@ namespace LegacySecurityManager.Tests
         [Test]
         public void password_and_confirm_password_are_not_equals_show_error()
         {
-            var inputs = new List<string>() { "userName", "fullName", "password", "notEqualsPassword" };
+            var inputs = new List<string>() { "Carlos", "Carlos Inguanzo", "password", "notEqualsPassword" };
             var securityManager = new SecurityManagerForTesting(inputs);
 
             securityManager.CreateUserInstance();
 
-            var expectedMessages = new List<string>(){ "Enter a username", "Enter your full name", "Enter your password", "Re-enter your password", "The passwords don't match" };
-            Assert.That(securityManager.PrintedMessages, Is.EquivalentTo(expectedMessages));
+            AssertThatLastMessageIs("The passwords don't match", securityManager);
         }
 
         [Test]
         public void password_less_than_8_characters_show_error()
         {
-            var inputs = new List<string>() { "userName", "fullName", "passwo", "passwo" };
+            var inputs = new List<string>() { "Raúl", "Corchero", "passwo", "passwo" };
             var securityManager = new SecurityManagerForTesting(inputs);
 
             securityManager.CreateUserInstance();
 
-            var expectedMessages = new List<string>() { "Enter a username", "Enter your full name", "Enter your password", "Re-enter your password", "Password must be at least 8 characters in length" };
+            AssertThatLastMessageIs("Password must be at least 8 characters in length", securityManager);
+        }
+
+        private void AssertThatLastMessageIs(string lastMessage, SecurityManagerForTesting securityManager)
+        {
+            var expectedMessages = GetExpectedMessages(lastMessage);
             Assert.That(securityManager.PrintedMessages, Is.EquivalentTo(expectedMessages));
+        }
+
+        private List<string> GetExpectedMessages(string lastMessage)
+        {
+            return new List<string>() { "Enter a username", "Enter your full name", "Enter your password", "Re-enter your password", lastMessage };
         }
     }
 
