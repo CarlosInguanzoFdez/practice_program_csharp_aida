@@ -37,5 +37,15 @@ namespace Hello.Tests
 
             _notify.Received(1).Notify("Buenas tardes");
         }
+
+        [Test]
+        public void When_not_between_6AM_and_12AM_and_12AM_and_8PM_return_buenas_noches()
+        {
+            _clock.Get().Returns(new DateTime(2024, 6, 11, 13, 0, 0));
+
+            _serviceHello.Hello();
+
+            _notify.Received(1).Notify("Buenas noches");
+        }
     }
 }
