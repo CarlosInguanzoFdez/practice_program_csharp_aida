@@ -34,11 +34,6 @@ namespace StockBroker.Tests
         [Test]
         public void buy_order_with_one_quantity()
         {
-            _notifier = Substitute.For<Notifier>();
-            _stockBrokerOnlineService = Substitute.For<StockBrokerOnlineService>();
-            _clock = Substitute.For<Clock>();
-            _stockBrokerClient = new StockBrokerClient(_notifier, _clock, _stockBrokerOnlineService);
-
             _clock.Get().Returns(new DateTime(2024,06,11,13, 45,00));
             
             _stockBrokerClient.PlaceOrders("GOOG 1 500.00 B");
