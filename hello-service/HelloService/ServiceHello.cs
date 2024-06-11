@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using Microsoft.VisualBasic;
 
@@ -5,6 +6,9 @@ namespace Hello;
 
 public class ServiceHello
 {
+    private const string GoodMorning = "Buenos días";
+    private const string GoodAfternoon = "Buenas tardes";
+    private const string GoodNight = "Buenas noches";
     private readonly Notifier _notify;
     private readonly Clock _clock;
 
@@ -18,17 +22,27 @@ public class ServiceHello
     {
         var date = _clock.Get();
 
-        if (date.Hour >= 6 && date.Hour < 12) {
-            _notify.Notify("Buenos días");
+        if (IsMorning(date)) {
+            _notify.Notify(GoodMorning);
             return;
         }
 
-        if (date.Hour >= 12 && date.Hour < 20)
+        if (IsAfternoon(date))
         {
-            _notify.Notify("Buenas tardes");
+            _notify.Notify(GoodAfternoon);
             return;
         }
 
-        _notify.Notify("Buenas noches");
+        _notify.Notify(GoodNight);
+    }
+
+    private bool IsAfternoon(DateTime date)
+    {
+        return date.Hour >= 12 && date.Hour < 20;
+    }
+
+    private bool IsMorning(DateTime date)
+    {
+        return date.Hour >= 6 && date.Hour < 12;
     }
 }
