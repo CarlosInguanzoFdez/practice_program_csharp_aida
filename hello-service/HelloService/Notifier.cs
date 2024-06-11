@@ -2,5 +2,5 @@ namespace Hello;
 
 public interface Notifier
 {
-    void Notify();
+    void Notify(string message);
 }
