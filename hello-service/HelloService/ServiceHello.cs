@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace Hello;
 
 public class ServiceHello
@@ -13,6 +15,12 @@ public class ServiceHello
 
     public void Hello()
     {
+        var date = _clock.Get();
+
+        if (date.Hour >= 6 && date.Hour >= 12) {
+            _notify.Notify("Buenas tardes");
+        }
+            
         _notify.Notify("Buenos días");
     }
 }
