@@ -1,4 +1,4 @@
-namespace Hello.Tests;
+namespace Hello;
 
 public interface Notifier
 {

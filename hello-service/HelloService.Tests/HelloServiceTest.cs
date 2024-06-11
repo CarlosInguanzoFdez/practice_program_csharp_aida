@@ -11,6 +11,7 @@ namespace Hello.Tests
         public void Canary_Test()
         {
             _notify = Substitute.For<Notifier>();
+            _clock = Substitute.For<Clock>();
         }
     }
 }
