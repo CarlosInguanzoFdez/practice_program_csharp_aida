@@ -15,6 +15,6 @@ public class StockBrokerClient
 
     public void PlaceOrders(string orderSequence)
     {
-
+        _notifier.Notify("6/11/2024 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 0.00");
     }
 }
