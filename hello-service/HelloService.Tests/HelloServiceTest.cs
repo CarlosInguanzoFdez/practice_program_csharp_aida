@@ -1,17 +1,16 @@
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Hello.Tests
 {
     public class HelloServiceTest
     {
-        /*
-         
-         */
+        private Notifier _notify;
 
         [Test]
         public void Canary_Test()
         {
-            var helloService = new HelloServiceConsole();
+            _notify = Substitute.For<Notifier>();
         }
     }
 }
