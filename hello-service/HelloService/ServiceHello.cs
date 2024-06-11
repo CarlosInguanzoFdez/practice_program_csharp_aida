@@ -18,13 +18,15 @@ public class ServiceHello
     {
         var date = _clock.Get();
 
-        if (date.Hour >= 6 && date.Hour <= 12) {
+        if (date.Hour >= 6 && date.Hour < 12) {
             _notify.Notify("Buenos días");
+            return;
         }
 
-        if (date.Hour > 12 && date.Hour < 20)
+        if (date.Hour >= 12 && date.Hour < 20)
         {
             _notify.Notify("Buenas tardes");
+            return;
         }
 
         _notify.Notify("Buenas noches");

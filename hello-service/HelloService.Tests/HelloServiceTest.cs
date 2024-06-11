@@ -19,33 +19,42 @@ namespace Hello.Tests
         }
 
         [Test]
-        public void When_between_6AM_and_12AM_return_buenos_dias()
+        [TestCase("11/6/2024 06:00:00 AM")]
+        [TestCase("11/6/2024 11:59:59 AM")]
+        public void When_between_6AM_and_12AM_return_buenos_dias(string date)
         {
-            _clock.Get().Returns(new DateTime(2024,6,11,7,0,0));
+            _clock.Get().Returns(DateTime.Parse(date));
 
             _serviceHello.Hello();
 
             _notify.Received(1).Notify("Buenos días");
+            _notify.Received(1).Notify(Arg.Any<string>());
         }
 
         [Test]
-        public void When_between_12AM_and_8PM_return_buenas_tardes()
+        [TestCase("11/6/2024 12:00:00 PM")]
+        [TestCase("11/6/2024 07:59:59 PM")]
+        public void When_between_12AM_and_8PM_return_buenas_tardes(string date)
         {
-            _clock.Get().Returns(new DateTime(2024, 6, 11, 13, 0, 0));
+            _clock.Get().Returns(DateTime.Parse(date));
 
             _serviceHello.Hello();
 
             _notify.Received(1).Notify("Buenas tardes");
+            _notify.Received(1).Notify(Arg.Any<string>());
         }
 
         [Test]
-        public void When_not_between_6AM_and_12AM_and_12AM_and_8PM_return_buenas_noches()
+        [TestCase("11/6/2024 08:00:00 PM")]
+        [TestCase("11/6/2024 05:59:59 AM")]
+        public void When_not_between_6AM_and_12AM_and_12AM_and_8PM_return_buenas_noches(string date)
         {
-            _clock.Get().Returns(new DateTime(2024, 6, 11, 13, 0, 0));
+            _clock.Get().Returns(DateTime.Parse(date));
 
             _serviceHello.Hello();
 
             _notify.Received(1).Notify("Buenas noches");
+            _notify.Received(1).Notify(Arg.Any<string>());
         }
     }
 }
