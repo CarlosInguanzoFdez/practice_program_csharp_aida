@@ -31,15 +31,27 @@ namespace StockBroker.Tests
         }
 
         [Test]
-        public void buy_order_with_one_quantity()
+        public void buy_order_with_one_product_and_one_quantity()
         {
-            _clock.Get().Returns(new DateTime(2024,06,11,13, 45,00));
+            _clock.Get().Returns(new DateTime(2023,10,20,13, 45,00));
             
             _stockBrokerClient.PlaceOrders("GOOG 1 200.00 B");
 
-            VerifyNotifierIsCalledWith("6/11/2024 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
+            VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
             _stockBrokerOnlineService.Received(1).Buy(new OrderDto("GOOG", 1, 200.00m));
         }
+
+        [Test]
+        public void buy_order_with_one_product_with_several_quantities()
+        {
+            _clock.Get().Returns(new DateTime(2023, 10, 25, 14, 45, 00));
+
+            _stockBrokerClient.PlaceOrders("GOOG 2 200.00 B");
+
+            VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 400.00, Sell: \u20ac 0.00");
+            _stockBrokerOnlineService.Received(1).Buy(new OrderDto("GOOG", 2, 200.00m));
+        }
+
         private void VerifyNotifierIsCalledWith(string message)
         {
             _notifier.Received(1).Notify(message);

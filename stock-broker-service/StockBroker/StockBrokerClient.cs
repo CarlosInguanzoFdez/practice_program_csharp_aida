@@ -33,8 +33,8 @@ public class StockBrokerClient
     private string GetFormatMessage(DateTime dateTimeOrder, OrderDto orderDto)
     {
         var dateTimerOrderFormated = dateTimeOrder.ToString(StandarFormatCode, _currentCultureInfo);
-
-        return $"{dateTimerOrderFormated} Buy: \u20ac {orderDto.price.ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac 0.00";
+        var totalBuy = orderDto.price * orderDto.quantity;
+        return $"{dateTimerOrderFormated} Buy: \u20ac {totalBuy.ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac 0.00";
     }
 
     private OrderDto CreateOrderDto(string orderSequence)
