@@ -23,7 +23,10 @@ public class StockBrokerClient
     {
         var dateTimeOrder = _clock.Get();
         var orderDto = CreateOrderDto(orderSequence);
-        _stockBrokerOnlineService.Buy(orderDto);
+
+        if (!string.IsNullOrEmpty(orderSequence)){
+            _stockBrokerOnlineService.Buy(orderDto);
+        }
         _notifier.Notify(GetFormatMessage(dateTimeOrder, orderDto));
     }
 

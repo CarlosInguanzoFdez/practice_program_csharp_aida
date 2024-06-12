@@ -26,8 +26,8 @@ namespace StockBroker.Tests
 
             _stockBrokerClient.PlaceOrders("");
 
-            _notifier.Received(1).Notify("6/11/2024 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 0.00");
-            _notifier.Received(1).Notify(Arg.Any<string>());
+            VerifyNotifierIsCalledWith("6/11/2024 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 0.00");
+            _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<OrderDto>());
         }
 
         [Test]
@@ -37,9 +37,13 @@ namespace StockBroker.Tests
             
             _stockBrokerClient.PlaceOrders("GOOG 1 200.00 B");
 
-            _notifier.Received(1).Notify("6/11/2024 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
-            _notifier.Received(1).Notify(Arg.Any<string>());
+            VerifyNotifierIsCalledWith("6/11/2024 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
             _stockBrokerOnlineService.Received(1).Buy(new OrderDto("GOOG", 1, 200.00m));
+        }
+        private void VerifyNotifierIsCalledWith(string message)
+        {
+            _notifier.Received(1).Notify(message);
+            _notifier.Received(1).Notify(Arg.Any<string>());
         }
 
         /*
