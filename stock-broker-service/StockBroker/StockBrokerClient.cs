@@ -22,15 +22,14 @@ public class StockBrokerClient
     public void PlaceOrders(string orderSequence)
     {
         var dateTimeOrder = _clock.Get();
-
-        _notifier.Notify(GetFormatMessage(dateTimeOrder, orderSequence));
+        var orderDto = CreateOrderDto(orderSequence);
+        _stockBrokerOnlineService.Buy(orderDto);
+        _notifier.Notify(GetFormatMessage(dateTimeOrder, orderDto));
     }
 
-    private string GetFormatMessage(DateTime dateTimeOrder, string orderSequence)
+    private string GetFormatMessage(DateTime dateTimeOrder, OrderDto orderDto)
     {
         var dateTimerOrderFormated = dateTimeOrder.ToString(StandarFormatCode, _currentCultureInfo);
-
-        var orderDto = CreateOrderDto(orderSequence);
 
         return $"{dateTimerOrderFormated} Buy: \u20ac {orderDto.price.ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac 0.00";
     }

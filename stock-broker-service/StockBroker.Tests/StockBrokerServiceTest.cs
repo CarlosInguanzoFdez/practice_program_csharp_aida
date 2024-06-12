@@ -39,11 +39,13 @@ namespace StockBroker.Tests
 
             _notifier.Received(1).Notify("6/11/2024 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
             _notifier.Received(1).Notify(Arg.Any<string>());
+            _stockBrokerOnlineService.Received(1).Buy(new OrderDto("GOOG", 1, 200.00m));
         }
 
         /*
             ejemplo vacio: DONE
-            ejemplo buy con un producto y 1 quantity
+            ejemplo buy con un producto y 1 quantity: DONE
+
             ejemplo sell con un producto y 1 quantity
             ejemplo con varios productos y 1 quantity cada uno
             ejemplo con varios productos y varios quantity cada uno
