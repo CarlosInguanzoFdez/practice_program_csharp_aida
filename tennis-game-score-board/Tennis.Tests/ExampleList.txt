@@ -1,0 +1,56 @@
+﻿INPUTS:
+    $ score 1
+    $ score 2
+OUTPUTS:
+    Fifteen Love
+    Thirty Love
+    Forty Love
+    Love Fifteen
+    Love Thirty
+    Love Forty
+    Deuce
+    Advantage Forty
+    Forty Advantage
+    
+    Player 1 has won!!  
+    It was a nice game.   
+    Bye now!
+
+    Player 2 has won!!  
+    It was a nice game.   
+    Bye now!
+
+Lista de ejemplos (Zero - One - Many - Ooops)
+    - Al empezar el partido: input: "$ score 1" output: "Fifteen Love"
+    - Al empezar el partido: input: "$ score 2" output: "Love Fifteen"
+
+    - Marcador en "Fifteen Love" input: "$ score 1" output: "Thirty Love"
+    - Marcador en "Fifteen Love" input: "$ score 2" output: "Fifteen Fifteen"
+
+    - Marcador en "Love Fifteen " input: "$ score 1" output: "Fifteen Fifteen"
+    - Marcador en "Love Fifteen" input: "$ score 2" output: "Love Thirty"
+
+    - Marcador en "Fifteen Fifteen " input: "$ score 1" output: "Thirty Fifteen"
+    - Marcador en "Fifteen Fifteen" input: "$ score 2" output: "Fifteen Thirty"
+
+    - Marcador en "Thirty Fifteen " input: "$ score 1" output: "Forty Fifteen"
+    - Marcador en "Thirty Fifteen" input: "$ score 2" output: "Thirty Thirty"
+
+    - Marcador en "Fifteen Thirty " input: "$ score 1" output: "Thirty Thirty"
+    - Marcador en "Fifteen Thirty" input: "$ score 2" output: "Fifteen Forty"
+
+    - Marcador en "Thirty Thirty " input: "$ score 1" output: "Forty Thirty"
+    - Marcador en "Thirty Thirty" input: "$ score 2" output: "Thirty Forty"
+
+    - Marcador en "Forty Thirty " input: "$ score 1" output: "Player 1 has won!! It was a nice game. Bye now!"
+    - Marcador en "Forty Thirty" input: "$ score 2" output: "Deuce"
+
+    - Marcador en "Thirty Forty" input: "$ score 1" output: "Deuce"
+    - Marcador en "Thirty Forty" input: "$ score 2" output: "Player 2 has won!! It was a nice game. Bye now!"
+
+    - Marcador en "Deuce" input: "$ score 1" output: "Advantage Forty"
+    - Marcador en "Deuce" input: "$ score 2" output: "Forty Advantage"
+    
+    - Independientemente de como vaya el marcador -> Preguntar al PO que mostrar en el caso de que el input sea erróneo???
+        input: "$ score " output: "" ?
+        input: "" output: "" ?
