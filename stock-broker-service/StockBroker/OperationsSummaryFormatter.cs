@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace StockBroker;
@@ -16,17 +17,23 @@ public partial class StockBrokerClient
             _clock = clock;
         }
 
-        public string FormatMessage(Order order)
+        public string FormatMessage(List<Order> orderList)
         {
             var dateTimeOrder = _clock.Get();
             var dateTimerOrderFormated = dateTimeOrder.ToString(StandarFormatCode, _currentCultureInfo);
             var totalSellPrice = 0.00m;
             var totalBuyPrice = 0.00m;
-            if (order.isBuy) {
-                totalBuyPrice = order.GetTotalPrice();
-            }
-            else {
-                totalSellPrice = order.GetTotalPrice();
+
+            foreach (var order in orderList)
+            {
+                if (order.isBuy)
+                {
+                    totalBuyPrice += order.GetTotalPrice();
+                }
+                else
+                {
+                    totalSellPrice += order.GetTotalPrice();
+                }
             }
             
             return $"{dateTimerOrderFormated} Buy: \u20ac {totalBuyPrice.ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac {totalSellPrice.ToString(StandarFormatCode, _currentCultureInfo)}";

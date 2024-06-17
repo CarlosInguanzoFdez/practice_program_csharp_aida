@@ -64,6 +64,19 @@ namespace StockBroker.Tests
             _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 2));
         }
 
+        [Test]
+        public void buy_order_with_several_products_with_several_quantities()
+        {
+            _clock.Get().Returns(new DateTime(2023, 10, 25, 14, 45, 00));
+
+            _stockBrokerClient.PlaceOrders("ZNGA 3 100 B,AAPL 2 250 B");
+
+            VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 800.00, Sell: \u20ac 0.00");
+            _stockBrokerOnlineService.Received(2).Buy(Arg.Any<StockOrderDto>());
+            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("ZNGA", 3));
+            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("AAPL", 2));
+        }
+
         private void VerifyNotifierIsCalledWith(string message)
         {
             _notifier.Received(1).Notify(message);
@@ -76,7 +89,6 @@ namespace StockBroker.Tests
             ejemplo buy con un producto y 2 quantity: DONE
             ejemplo sell con un producto y 1 quantity: DONE
             ejemplo sell con un producto y 2 quantity: DONE
-
 
             ejemplo con varios productos y 1 quantity cada uno
             ejemplo con varios productos y varios quantity cada uno

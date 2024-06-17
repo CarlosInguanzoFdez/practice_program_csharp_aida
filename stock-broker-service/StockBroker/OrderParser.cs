@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace StockBroker;
@@ -20,6 +21,21 @@ public partial class StockBrokerClient
             }
 
             return ParseSequence(orderSequence);
+        }
+
+        public List<Order> MultipleParse(string sequence)
+        {
+            var orderList = new List<Order>();
+            if (string.IsNullOrEmpty(sequence)) {
+                return orderList;
+            }
+            var ordersSequence = sequence.Split(",");
+            foreach (var orderSequence in ordersSequence)
+            {
+                orderList.Add(ParseSequence(orderSequence));
+            }
+
+            return orderList;
         }
 
         private Order ParseSequence(string orderSequence)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using static StockBroker.StockBrokerClient;
 
@@ -21,23 +22,25 @@ public partial class StockBrokerClient
 
     public void PlaceOrders(string orderSequence)
     {
-        var order = _orderParser.Parse(orderSequence);
+        var orderList = _orderParser.MultipleParse(orderSequence);
 
-        if (!string.IsNullOrEmpty(orderSequence)){
-            if (order.isBuy){
+        foreach (var order in orderList) {
+            if (order.isBuy)
+            {
                 _stockBrokerOnlineService.Buy(CreateStockOrderDto(order));
             }
-            else {
+            else
+            {
                 _stockBrokerOnlineService.Sell(CreateStockOrderDto(order));
             }
         }
 
-        _notifier.Notify(GetFormatMessage(order));
+        _notifier.Notify(GetFormatMessage(orderList));
     }
 
-    private string GetFormatMessage(Order order)
+    private string GetFormatMessage(List<Order> orderList)
     {
-        return _operationsSummaryFormatter.FormatMessage(order);
+        return _operationsSummaryFormatter.FormatMessage(orderList);
     }
 
     private StockOrderDto CreateStockOrderDto(Order order)
