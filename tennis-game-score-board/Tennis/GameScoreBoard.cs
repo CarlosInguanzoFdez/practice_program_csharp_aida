@@ -16,11 +16,16 @@ public class GameScoreBoard
         var refereeInput = ReadRefereeInput();
 
         if (refereeInput == "$ score 1") {
-            _notifier.Notify("Fifteen Love");
+            Print("Fifteen Love");
         }
         else {
-            _notifier.Notify("Love Fifteen");
+            Print("Love Fifteen");
         }
+    }
+
+    private void Print(string scoreBoard)
+    {
+        _notifier.Notify(scoreBoard);
     }
 
     private string ReadRefereeInput()
