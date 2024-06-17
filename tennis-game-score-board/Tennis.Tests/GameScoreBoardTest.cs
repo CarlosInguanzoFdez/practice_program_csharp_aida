@@ -38,4 +38,15 @@ public class GameScoreBoardTest
 
         _notifier.Received(1).Notify("Love Fifteen");
     }
+
+    [Ignore("")]
+    [Test]
+    public void score_board_is_thirty_love_when_scoreboard_is_fifteen_love_and_player1_has_scored()
+    {
+        _reader.Read().Returns(Player1Scored);
+
+        _gameScoreBoard.StartGame();
+
+        _notifier.Received(1).Notify("Thirty Love");
+    }
 }
