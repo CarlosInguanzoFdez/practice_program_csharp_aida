@@ -38,7 +38,7 @@ namespace StockBroker.Tests
             _stockBrokerClient.PlaceOrders("GOOG 1 200.00 B");
 
             VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
-            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 1, 200.00m));
+            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 1));
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace StockBroker.Tests
             _stockBrokerClient.PlaceOrders("GOOG 2 200.00 B");
 
             VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 400.00, Sell: \u20ac 0.00");
-            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 2, 200.00m));
+            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 2));
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace StockBroker.Tests
 
             VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 150.00");
             _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<StockOrderDto>());
-            _stockBrokerOnlineService.Received(1).Sell(new StockOrderDto("GOOG", 1, 150.00m));
+            _stockBrokerOnlineService.Received(1).Sell(new StockOrderDto("GOOG", 1));
         }
 
         private void VerifyNotifierIsCalledWith(string message)
@@ -74,7 +74,7 @@ namespace StockBroker.Tests
             ejemplo vacio: DONE
             ejemplo buy con un producto y 1 quantity: DONE
             ejemplo buy con un producto y 2 quantity: DONE
-            ejemplo sell con un producto y 1 quantity
+            ejemplo sell con un producto y 1 quantity: DONE
 
             ejemplo con varios productos y 1 quantity cada uno
             ejemplo con varios productos y varios quantity cada uno

@@ -42,7 +42,7 @@ public partial class StockBrokerClient
 
     private StockOrderDto CreateStockOrderDto(Order order)
     {
-        var stockOrderDto = new StockOrderDto(order.ticker, order.quantity, order.price);
+        var stockOrderDto = new StockOrderDto(order.ticker, order.quantity);
         return stockOrderDto;
     }
 }

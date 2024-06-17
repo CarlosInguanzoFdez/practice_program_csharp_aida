@@ -20,11 +20,16 @@ public partial class StockBrokerClient
         {
             var dateTimeOrder = _clock.Get();
             var dateTimerOrderFormated = dateTimeOrder.ToString(StandarFormatCode, _currentCultureInfo);
-            if (order.isBuy)
-            {
-                return $"{dateTimerOrderFormated} Buy: \u20ac {order.GetTotalPrice().ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac 0.00";
+            var totalSellPrice = 0.00m;
+            var totalBuyPrice = 0.00m;
+            if (order.isBuy) {
+                totalBuyPrice = order.GetTotalPrice();
             }
-            return $"{dateTimerOrderFormated} Buy: \u20ac 0.00, Sell: \u20ac {order.GetTotalPrice().ToString(StandarFormatCode, _currentCultureInfo)}";
+            else {
+                totalSellPrice = order.GetTotalPrice();
+            }
+            
+            return $"{dateTimerOrderFormated} Buy: \u20ac {totalBuyPrice.ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac {totalSellPrice.ToString(StandarFormatCode, _currentCultureInfo)}";
         }
     }
 }
