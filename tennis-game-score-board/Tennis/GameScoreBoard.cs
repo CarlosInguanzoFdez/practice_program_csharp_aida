@@ -13,6 +13,11 @@ public class GameScoreBoard
 
     public void StartGame()
     {
-        _notifier.Notify("Fifteen Love");
+        if (_reader.Read() == "$ score 1") {
+            _notifier.Notify("Fifteen Love");
+        }
+        else {
+            _notifier.Notify("Love Fifteen");
+        }
     }
 }

@@ -28,7 +28,6 @@ public class GameScoreBoardTest
         _notifier.Received(1).Notify("Fifteen Love");
     }
 
-    [Ignore("")]
     [Test]
     public void score_board_is_love_fifteen_when_start_match_and_player2_has_scored()
     {
