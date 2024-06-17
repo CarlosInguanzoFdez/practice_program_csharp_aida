@@ -65,16 +65,29 @@ namespace StockBroker.Tests
         }
 
         [Test]
-        public void buy_order_with_several_products_with_several_quantities()
+        public void order_with_buy_and_sell()
         {
             _clock.Get().Returns(new DateTime(2023, 10, 25, 14, 45, 00));
 
-            _stockBrokerClient.PlaceOrders("ZNGA 3 100 B,AAPL 2 250 B");
+            _stockBrokerClient.PlaceOrders("ZNGA 3 100 B,AAPL 2 300 S");
 
-            VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 800.00, Sell: \u20ac 0.00");
-            _stockBrokerOnlineService.Received(2).Buy(Arg.Any<StockOrderDto>());
+            VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 300.00, Sell: \u20ac 600.00");
+            _stockBrokerOnlineService.Received(1).Buy(Arg.Any<StockOrderDto>());
+            _stockBrokerOnlineService.Received(1).Sell(Arg.Any<StockOrderDto>());
             _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("ZNGA", 3));
-            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("AAPL", 2));
+            _stockBrokerOnlineService.Received(1).Sell(new StockOrderDto("AAPL", 2));
+        }
+
+        [Ignore("")]
+        [Test]
+        public void call_buy_online_service_failed()
+        {
+            _clock.Get().Returns(new DateTime(2023, 10, 25, 14, 45, 00));
+            _stockBrokerOnlineService.Buy(Arg.Any<StockOrderDto>());
+
+            _stockBrokerClient.PlaceOrders("ZNGA 3 100 B,AAPL 2 300 S");
+
+            VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 300.00, Sell: \u20ac 600.00");
         }
 
         private void VerifyNotifierIsCalledWith(string message)
@@ -82,18 +95,5 @@ namespace StockBroker.Tests
             _notifier.Received(1).Notify(message);
             _notifier.Received(1).Notify(Arg.Any<string>());
         }
-
-        /*
-            ejemplo vacio: DONE
-            ejemplo buy con un producto y 1 quantity: DONE
-            ejemplo buy con un producto y 2 quantity: DONE
-            ejemplo sell con un producto y 1 quantity: DONE
-            ejemplo sell con un producto y 2 quantity: DONE
-
-            ejemplo con varios productos y 1 quantity cada uno
-            ejemplo con varios productos y varios quantity cada uno
-            ejemplo error con un producto
-            ejemplo error con varios productos
-         */
     }
 }
