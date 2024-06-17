@@ -31,7 +31,7 @@ namespace StockBroker.Tests
         }
 
         [Test]
-        public void buy_order_with_one_product_and_one_quantity()
+        public void buy_order_with_one_product()
         {
             _clock.Get().Returns(new DateTime(2023,10,20,13, 45,00));
             
@@ -42,7 +42,19 @@ namespace StockBroker.Tests
         }
 
         [Test]
-        public void buy_order_with_one_product_with_several_quantities()
+        public void sell_order_with_one_product()
+        {
+            _clock.Get().Returns(new DateTime(2023, 10, 20, 13, 45, 00));
+
+            _stockBrokerClient.PlaceOrders("GOOG 3 150.00 S");
+
+            VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 450.00");
+            _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<StockOrderDto>());
+            _stockBrokerOnlineService.Received(1).Sell(new StockOrderDto("GOOG", 3));
+        }
+
+        [Test]
+        public void order_with_one_product_with_several_quantities()
         {
             _clock.Get().Returns(new DateTime(2023, 10, 25, 14, 45, 00));
 
@@ -50,18 +62,6 @@ namespace StockBroker.Tests
 
             VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 400.00, Sell: \u20ac 0.00");
             _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 2));
-        }
-
-        [Test]
-        public void sell_order_with_one_product_and_one_quantity()
-        {
-            _clock.Get().Returns(new DateTime(2023, 10, 20, 13, 45, 00));
-
-            _stockBrokerClient.PlaceOrders("GOOG 1 150.00 S");
-
-            VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 150.00");
-            _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<StockOrderDto>());
-            _stockBrokerOnlineService.Received(1).Sell(new StockOrderDto("GOOG", 1));
         }
 
         private void VerifyNotifierIsCalledWith(string message)
@@ -75,6 +75,8 @@ namespace StockBroker.Tests
             ejemplo buy con un producto y 1 quantity: DONE
             ejemplo buy con un producto y 2 quantity: DONE
             ejemplo sell con un producto y 1 quantity: DONE
+            ejemplo sell con un producto y 2 quantity: DONE
+
 
             ejemplo con varios productos y 1 quantity cada uno
             ejemplo con varios productos y varios quantity cada uno
