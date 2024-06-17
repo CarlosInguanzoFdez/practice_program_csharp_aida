@@ -9,7 +9,8 @@ public partial class StockBrokerClient
     {
         private readonly CultureInfo _currentCultureInfo;
         private readonly Clock _clock;
-        private const string StandarFormatCode = "g";
+        private const string DateFormatCode = "g";
+        private const string DecimalFormatCode = "0.00";
 
         public OperationsSummaryFormatter(CultureInfo currentCultureInfo, Clock clock)
         {
@@ -20,23 +21,15 @@ public partial class StockBrokerClient
         public string FormatMessage(List<Order> orderList)
         {
             var dateTimeOrder = _clock.Get();
-            var dateTimerOrderFormated = dateTimeOrder.ToString(StandarFormatCode, _currentCultureInfo);
-            var totalSellPrice = 0.00m;
-            var totalBuyPrice = 0.00m;
+            var dateTimerOrderFormated = dateTimeOrder.ToString(DateFormatCode, _currentCultureInfo);
+            var summary = new OperationsSummary(orderList);
 
-            foreach (var order in orderList)
-            {
-                if (order.isBuy)
-                {
-                    totalBuyPrice += order.GetTotalPrice();
-                }
-                else
-                {
-                    totalSellPrice += order.GetTotalPrice();
-                }
-            }
-            
-            return $"{dateTimerOrderFormated} Buy: \u20ac {totalBuyPrice.ToString(StandarFormatCode, _currentCultureInfo)}, Sell: \u20ac {totalSellPrice.ToString(StandarFormatCode, _currentCultureInfo)}";
+            return $"{dateTimerOrderFormated} Buy: \u20ac {FormatDecimal(summary.GetBuy())}, Sell: \u20ac {FormatDecimal(summary.GetSell())}";
+        }
+
+        public string FormatDecimal(decimal value)
+        {
+            return value.ToString(DecimalFormatCode, _currentCultureInfo);
         }
     }
 }

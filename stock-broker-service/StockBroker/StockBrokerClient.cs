@@ -22,15 +22,13 @@ public partial class StockBrokerClient
 
     public void PlaceOrders(string orderSequence)
     {
-        var orderList = _orderParser.MultipleParse(orderSequence);
+        var orderList = _orderParser.Parse(orderSequence);
 
         foreach (var order in orderList) {
-            if (order.isBuy)
-            {
+            if (order.isBuy) {
                 _stockBrokerOnlineService.Buy(CreateStockOrderDto(order));
             }
-            else
-            {
+            else {
                 _stockBrokerOnlineService.Sell(CreateStockOrderDto(order));
             }
         }
