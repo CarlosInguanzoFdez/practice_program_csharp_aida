@@ -4,7 +4,7 @@ namespace StockBroker;
 
 public interface StockBrokerOnlineService
 {
-    void Buy(OrderDto orderDto);
+    void Buy(StockOrderDto stockOrderDto);
     
-    void Sell(OrderDto orderDto);
+    void Sell(StockOrderDto stockOrderDto);
 }

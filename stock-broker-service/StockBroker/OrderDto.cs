@@ -1,3 +1,3 @@
 namespace StockBroker;
 
-public record OrderDto(string ticker, int quantity, decimal price);
+public record StockOrderDto(string ticker, int quantity, decimal price);

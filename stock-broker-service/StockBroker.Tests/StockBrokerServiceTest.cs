@@ -14,8 +14,8 @@ namespace StockBroker.Tests
         public void Setup()
         {
             _notifier = Substitute.For<Notifier>();
-            _stockBrokerOnlineService = Substitute.For<StockBrokerOnlineService>();
             _clock = Substitute.For<Clock>();
+            _stockBrokerOnlineService = Substitute.For<StockBrokerOnlineService>();
             _stockBrokerClient = new StockBrokerClient(_notifier, _clock, _stockBrokerOnlineService);
         }
 
@@ -27,7 +27,7 @@ namespace StockBroker.Tests
             _stockBrokerClient.PlaceOrders("");
 
             VerifyNotifierIsCalledWith("6/11/2024 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 0.00");
-            _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<OrderDto>());
+            _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<StockOrderDto>());
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace StockBroker.Tests
             _stockBrokerClient.PlaceOrders("GOOG 1 200.00 B");
 
             VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 200.00, Sell: \u20ac 0.00");
-            _stockBrokerOnlineService.Received(1).Buy(new OrderDto("GOOG", 1, 200.00m));
+            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 1, 200.00m));
         }
 
         [Test]
@@ -49,10 +49,9 @@ namespace StockBroker.Tests
             _stockBrokerClient.PlaceOrders("GOOG 2 200.00 B");
 
             VerifyNotifierIsCalledWith("10/25/2023 2:45 PM Buy: \u20ac 400.00, Sell: \u20ac 0.00");
-            _stockBrokerOnlineService.Received(1).Buy(new OrderDto("GOOG", 2, 200.00m));
+            _stockBrokerOnlineService.Received(1).Buy(new StockOrderDto("GOOG", 2, 200.00m));
         }
 
-        [Ignore("")]
         [Test]
         public void sell_order_with_one_product_and_one_quantity()
         {
@@ -61,7 +60,8 @@ namespace StockBroker.Tests
             _stockBrokerClient.PlaceOrders("GOOG 1 150.00 S");
 
             VerifyNotifierIsCalledWith("10/20/2023 1:45 PM Buy: \u20ac 0.00, Sell: \u20ac 150.00");
-            _stockBrokerOnlineService.Received(1).Sell(new OrderDto("GOOG", 1, 150.00m));
+            _stockBrokerOnlineService.DidNotReceive().Buy(Arg.Any<StockOrderDto>());
+            _stockBrokerOnlineService.Received(1).Sell(new StockOrderDto("GOOG", 1, 150.00m));
         }
 
         private void VerifyNotifierIsCalledWith(string message)
@@ -74,8 +74,8 @@ namespace StockBroker.Tests
             ejemplo vacio: DONE
             ejemplo buy con un producto y 1 quantity: DONE
             ejemplo buy con un producto y 2 quantity: DONE
-
             ejemplo sell con un producto y 1 quantity
+
             ejemplo con varios productos y 1 quantity cada uno
             ejemplo con varios productos y varios quantity cada uno
             ejemplo error con un producto
