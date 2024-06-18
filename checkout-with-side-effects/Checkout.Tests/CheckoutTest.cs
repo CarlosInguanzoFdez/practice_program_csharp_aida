@@ -9,9 +9,10 @@ public class CheckoutTest
     {
         var checkout = new ForTestingCheckOut();
 
-        checkout.CreateReceipt(new Money(100));
+        var returnedReceipt = checkout.CreateReceipt(new Money(100));
 
         Assert.That(checkout._receiptStored, Is.EqualTo(new Receipt(new Money(100), new Money(20), new Money(120))));
+        Assert.That(checkout._receiptStored, Is.EqualTo(returnedReceipt));
     }
 
     public class ForTestingCheckOut : Checkout
