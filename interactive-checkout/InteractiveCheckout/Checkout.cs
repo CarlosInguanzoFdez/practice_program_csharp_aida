@@ -13,15 +13,19 @@ public class Checkout
     {
         _product = product;
         _emailService = emailService;
-        _newsLetterSubscribed = new UserConfirmation("Subscribe to our product " + product + " newsletter?");
-        _termsAndConditionsAccepted = new UserConfirmation(
-            "Accept our terms and conditions?\n" + //
-            "(Mandatory to place order for " + product + ")");
+        _newsLetterSubscribed = CreateUserConfirmation("Subscribe to our product " + product + " newsletter?");
+        _termsAndConditionsAccepted = CreateUserConfirmation("Accept our terms and conditions?\n" + //
+                                                             "(Mandatory to place order for " + product + ")");
     }
 
     public virtual void ConfirmOrder()
     {
         if (!_termsAndConditionsAccepted.WasAccepted()) throw new OrderCancelledException(_product);
         if (_newsLetterSubscribed.WasAccepted()) _emailService.SubscribeUserFor(_product);
+    }
+
+    protected virtual UserConfirmation CreateUserConfirmation(string message)
+    {
+        return new UserConfirmation(message);
     }
 }
