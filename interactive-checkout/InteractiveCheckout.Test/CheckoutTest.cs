@@ -21,7 +21,6 @@ public class CheckoutTest
         emailService.Received(1).SubscribeUserFor(polkaDotSocks);
     }
 
-    [Ignore("")]
     [Test]
     public void excepcion_when_user_discard_termsAndConditions()
     {
@@ -61,13 +60,12 @@ public class CheckoutTest
 
         protected override string InputReader()
         {
-            //if (_confirmation)
-            //{
-            //    return "y";
-            //}
+            if (_confirmation)
+            {
+                return "y";
+            }
 
-            //return "n";
-            return "y";
+            return "n";
         }
 
         protected override void Notify(string message)

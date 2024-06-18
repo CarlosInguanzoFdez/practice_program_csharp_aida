@@ -8,8 +8,15 @@ public class Checkout
 
         var receipt = new Receipt(amount, vat, amount.Add(vat));
 
-        ReceiptRepository.Store(receipt);
+        Store(receipt);
 
         return receipt;
     }
+
+    protected virtual void Store(Receipt receipt)
+    {
+        ReceiptRepository.Store(receipt);
+    }
+
+    // Se almacenan los datos en el repository -> retorna recep
 }
