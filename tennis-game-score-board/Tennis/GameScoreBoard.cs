@@ -19,26 +19,15 @@ public class GameScoreBoard
     {
         var refereeInput = ReadRefereeInput();
 
-        if (refereeInput == "$ score 1")
-        {
-            ScorePlayer1();
-            Print("Fifteen Love");
+        if (refereeInput == "$ score 1") {
+            _game.AddPointForPlayer(PlayerName1);
         }
-        else
-        {
-            ScorePlayer2();
-            Print("Love Fifteen");
+        else {
+            _game.AddPointForPlayer(PlayerName2);
         }
-    }
 
-    private void ScorePlayer1()
-    {
-        _game.AddPointForPlayer(PlayerName1);
-    }
-
-    private void ScorePlayer2()
-    {
-        _game.AddPointForPlayer(PlayerName2);
+        var score = _game.GetScore();
+        Print(score);
     }
 
     private void Print(string scoreBoard)

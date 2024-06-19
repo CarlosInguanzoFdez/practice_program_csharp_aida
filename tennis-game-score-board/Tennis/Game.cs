@@ -20,4 +20,18 @@ public class Game
 
         _player2._points++;
     }
+
+    public string GetScore()
+    {
+        if (_player1._points == 1 && _player2._points == 0) {
+            return "Fifteen Love";
+        }
+
+        if (_player1._points == 0 && _player2._points == 1)
+        {
+            return "Love Fifteen";
+        }
+
+        return "";
+    }
 }
