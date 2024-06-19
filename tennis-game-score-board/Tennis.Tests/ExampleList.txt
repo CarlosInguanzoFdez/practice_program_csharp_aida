@@ -2,8 +2,10 @@
     $ score 1
     $ score 2
 OUTPUTS:
-    Fifteen Love
+    Fifteen Love    
+    Fifteen Fifteen
     Thirty Love
+    Thirty Thirty
     Forty Love
     Love Fifteen
     Love Thirty

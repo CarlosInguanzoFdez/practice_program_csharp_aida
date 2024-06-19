@@ -2,32 +2,43 @@ namespace Tennis;
 
 public class GameScoreBoard
 {
+    private const string PlayerName1 = "player1";
+    private const string PlayerName2 = "player2";
     private readonly Reader _reader;
     private readonly Notifier _notifier;
-    private readonly Score _score;
+    private readonly Game _game;
 
     public GameScoreBoard(Reader reader, Notifier notifier)
     {
         _reader = reader;
         _notifier = notifier;
-        _score = new Score();
+        _game = new Game(PlayerName1, PlayerName2);
     }
 
     public void StartGame()
     {
         var refereeInput = ReadRefereeInput();
 
-        if (refereeInput == "$ score 1") {
+        if (refereeInput == "$ score 1")
+        {
+            ScorePlayer1();
             Print("Fifteen Love");
         }
-        else {
+        else
+        {
+            ScorePlayer2();
             Print("Love Fifteen");
         }
     }
 
-    public void ScorePlayer1()
+    private void ScorePlayer1()
     {
-        _score.AddPointForPlayer("$ score 1");
+        _game.AddPointForPlayer(PlayerName1);
+    }
+
+    private void ScorePlayer2()
+    {
+        _game.AddPointForPlayer(PlayerName2);
     }
 
     private void Print(string scoreBoard)
@@ -38,13 +49,5 @@ public class GameScoreBoard
     private string ReadRefereeInput()
     {
         return _reader.Read();
-    }
-}
-
-public class Score
-{
-    public void AddPointForPlayer(string player)
-    {
-        
     }
 }
