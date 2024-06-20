@@ -5,7 +5,7 @@ public class Game
     private readonly Player _player1;
     private readonly Player _player2;
 
-    public Game(string player1, string player2)
+    public Game()
     {
         _player1 = new Player();
         _player2 = new Player();

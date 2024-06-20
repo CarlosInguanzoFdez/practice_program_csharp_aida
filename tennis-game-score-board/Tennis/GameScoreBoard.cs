@@ -2,8 +2,6 @@ namespace Tennis;
 
 public class GameScoreBoard
 {
-    private const string PlayerName1 = "player1";
-    private const string PlayerName2 = "player2";
     private readonly Reader _reader;
     private readonly Notifier _notifier;
     private readonly Game _game;
@@ -12,7 +10,7 @@ public class GameScoreBoard
     {
         _reader = reader;
         _notifier = notifier;
-        _game = new Game(PlayerName1, PlayerName2);
+        _game = new Game();
     }
 
     public void StartGame()
