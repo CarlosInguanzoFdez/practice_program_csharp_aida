@@ -43,6 +43,11 @@ public class Game
             return "Advantage Forty";
         }
 
+        if (_player2.HasAdvantage(_player1))
+        {
+            return "Forty Advantage";
+        }
+
         return CurrentScore();
     }
 
