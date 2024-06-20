@@ -22,7 +22,7 @@ public class Player
 
     public bool Deuce(Player otherPlayer)
     {
-        return Points == 3 && Points == otherPlayer.Points;
+        return Points >= 3 && Points == otherPlayer.Points;
     }
 
     public bool HasAdvantage(Player otherPlayer)

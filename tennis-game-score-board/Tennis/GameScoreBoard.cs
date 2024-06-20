@@ -19,7 +19,7 @@ public class GameScoreBoard
         {
             var refereeInput = ReadRefereeInput();
 
-            if (Player1Scored(refereeInput)) 
+            if (refereeInput == "$ score 1") 
             {
                 _game.AddPointForPlayer1();
             }
@@ -35,11 +35,6 @@ public class GameScoreBoard
                 return;
             }
         }
-    }
-
-    private static bool Player1Scored(string refereeInput)
-    {
-        return refereeInput == "$ score 1";
     }
 
     private void Print(string scoreBoard)
