@@ -15,8 +15,18 @@ public class Player
         return _points++;
     }
 
-    public bool Win()
+    public bool Win(Player otherPlayer)
     {
-        return Points > 3;
+        return Points > 3 && Points > otherPlayer.Points + 1;
+    }
+
+    public bool Deuce(Player otherPlayer)
+    {
+        return Points == 3 && Points == otherPlayer.Points;
+    }
+
+    public bool HasAdvantage(Player otherPlayer)
+    {
+        return otherPlayer.Points >= 3 && Points > otherPlayer.Points;
     }
 }

@@ -23,14 +23,24 @@ public class Game
 
     public string GetScore()
     {
-        if (_player1.Win())
+        if (_player1.Win(_player2))
         {
             return MessageForWinner("Player 1");
         }
 
-        if (_player2.Win())
+        if (_player2.Win(_player1))
         {
             return MessageForWinner("Player 2");
+        }
+
+        if (_player1.Deuce(_player2))
+        {
+            return "Deuce";
+        }
+
+        if (_player1.HasAdvantage(_player2))
+        {
+            return "Advantage Forty";
         }
 
         return CurrentScore();
@@ -38,7 +48,7 @@ public class Game
 
     public bool IsFinish()
     {
-        return _player1.Win() || _player2.Win();
+        return _player1.Win(_player2) || _player2.Win(_player1);
     }
 
     private string CurrentScore()

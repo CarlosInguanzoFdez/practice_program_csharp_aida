@@ -45,4 +45,21 @@ public class GameScoreBoardTest
         _notifier.Received(1).Notify("Love Forty");
         _notifier.Received(1).Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
     }
+
+    [Test]
+    public void score_is_deuce_when_each_player_win_3_point()
+    {
+        _reader.Read().Returns(Player2Scored, Player1Scored, Player2Scored, Player1Scored, Player1Scored, Player2Scored, Player1Scored, Player1Scored);
+
+        _gameScoreBoard.StartGame();
+
+        _notifier.Received(1).Notify("Love Fifteen");
+        _notifier.Received(1).Notify("Fifteen Fifteen");
+        _notifier.Received(1).Notify("Fifteen Thirty");
+        _notifier.Received(1).Notify("Thirty Thirty");
+        _notifier.Received(1).Notify("Forty Thirty");
+        _notifier.Received(1).Notify("Deuce");
+        _notifier.Received(1).Notify("Advantage Forty");
+        _notifier.Received(1).Notify("Player 1 has won!!\nIt was a nice game.\nBye now!");
+    }
 }
