@@ -60,4 +60,9 @@ public class Game
 
         return "Forty";
     }
+
+    public bool IsFinish()
+    {
+        return _player1.Win() || _player2.Win();
+    }
 }

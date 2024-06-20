@@ -23,7 +23,7 @@ public class GameScoreBoardTest
     [Test]
     public void finish_game_when_player1_win_all_points_consecutives()
     {
-        _reader.Read().Returns(Player1Scored, Player1Scored, Player1Scored, Player1Scored, EndGame);
+        _reader.Read().Returns(Player1Scored, Player1Scored, Player1Scored, Player1Scored);
 
         _gameScoreBoard.StartGame();
 
@@ -36,7 +36,7 @@ public class GameScoreBoardTest
     [Test]
     public void finish_game_when_player2_win_all_points_consecutives()
     {
-        _reader.Read().Returns(Player2Scored, Player2Scored, Player2Scored, Player2Scored, EndGame);
+        _reader.Read().Returns(Player2Scored, Player2Scored, Player2Scored, Player2Scored);
 
         _gameScoreBoard.StartGame();
 
