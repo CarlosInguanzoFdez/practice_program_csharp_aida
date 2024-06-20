@@ -21,7 +21,7 @@ public class GameScoreBoardTest
     }
 
     [Test]
-    public void finish_game_when_player1_win_all_points_consecutives()
+    public void finish_game_when_player1_win_all_points()
     {
         _reader.Read().Returns(Player1Scored, Player1Scored, Player1Scored, Player1Scored);
 
@@ -34,7 +34,7 @@ public class GameScoreBoardTest
     }
 
     [Test]
-    public void finish_game_when_player2_win_all_points_consecutives()
+    public void finish_game_when_player2_win_all_points()
     {
         _reader.Read().Returns(Player2Scored, Player2Scored, Player2Scored, Player2Scored);
 
