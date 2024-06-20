@@ -28,12 +28,12 @@ public class GameScoreBoard
                 _game.AddPointForPlayer2();
             }
 
-            Print(_game.GetScore());
-
             if (refereeInput == "Exit")
             {
                 return;
             }
+
+            Print(_game.GetScore());
         }
     }
 

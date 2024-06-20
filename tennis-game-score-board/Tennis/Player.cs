@@ -14,4 +14,9 @@ public class Player
     {
         return _points++;
     }
+
+    public bool Win()
+    {
+        return Points > 3;
+    }
 }

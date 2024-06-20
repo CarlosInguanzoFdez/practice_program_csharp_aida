@@ -23,6 +23,11 @@ public class Game
 
     public string GetScore()
     {
+        if (_player1.Win())
+        {
+            return "Player 1 has won!!\nIt was a nice game.\nBye now!";
+        }
+
         return $"{TranslateToPointDescription(_player1.Points)} {TranslateToPointDescription(_player2.Points)}";
     }
 
@@ -42,7 +47,7 @@ public class Game
         {
             return "Thirty";
         }
-        
+
         return "Forty";
     }
 }
