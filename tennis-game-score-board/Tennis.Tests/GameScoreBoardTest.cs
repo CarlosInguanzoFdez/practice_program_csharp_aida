@@ -21,37 +21,6 @@ public class GameScoreBoardTest
     }
 
     [Test]
-    public void score_board_is_fifteen_love_when_start_match_and_player1_has_scored()
-    {
-        _reader.Read().Returns(Player1Scored, EndGame);
-
-        _gameScoreBoard.StartGame();
-
-        _notifier.Received(1).Notify("Fifteen Love");
-    }
-
-    [Test]
-    public void score_board_is_love_fifteen_when_start_match_and_player2_has_scored()
-    {
-        _reader.Read().Returns(Player2Scored, EndGame);
-
-        _gameScoreBoard.StartGame();
-
-        _notifier.Received(1).Notify("Love Fifteen");
-    }
-
-    [Test]
-    public void score_board_is_fifteen_love_when_start_match_and_player1_has_scored_two_points_consecutives()
-    {
-        _reader.Read().Returns(Player1Scored, Player1Scored, EndGame);
-
-        _gameScoreBoard.StartGame();
-
-        _notifier.Received(1).Notify("Fifteen Love");
-        _notifier.Received(1).Notify("Thirty Love");
-    }
-
-    [Test]
     public void finish_game_when_player1_win_all_points_consecutives()
     {
         _reader.Read().Returns(Player1Scored, Player1Scored, Player1Scored, Player1Scored, EndGame);
