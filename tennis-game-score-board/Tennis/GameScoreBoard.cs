@@ -24,8 +24,22 @@ public class GameScoreBoard
             _game.AddPointForPlayer2();
         }
 
-        var score = _game.GetScore();
-        Print(score);
+        Print(_game.GetScore());
+
+        refereeInput = ReadRefereeInput();
+
+        if (refereeInput == "Exit") {
+            return;
+        }
+
+        if (refereeInput == "$ score 1") {
+            _game.AddPointForPlayer1();
+        }
+        else {
+            _game.AddPointForPlayer2();
+        }
+
+        Print(_game.GetScore());
     }
 
     private void Print(string scoreBoard)

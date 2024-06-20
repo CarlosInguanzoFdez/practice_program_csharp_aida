@@ -33,6 +33,11 @@ public class Game
             return "Love Fifteen";
         }
 
-        return "";
+        if (_player1._points == 2 && _player2._points == 0)
+        {
+            return "Thirty Love";
+        }
+
+        return "xxx";
     }
 }
