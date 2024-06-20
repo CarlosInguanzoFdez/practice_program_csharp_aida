@@ -25,10 +25,20 @@ public class Game
     {
         if (_player1.Win())
         {
-            return "Player 1 has won!!\nIt was a nice game.\nBye now!";
+            return MessageForWinner("Player 1");
+        }
+
+        if (_player2.Win())
+        {
+            return MessageForWinner("Player 2");
         }
 
         return $"{TranslateToPointDescription(_player1.Points)} {TranslateToPointDescription(_player2.Points)}";
+    }
+
+    private string MessageForWinner(string player)
+    {
+        return $"{player} has won!!\nIt was a nice game.\nBye now!";
     }
 
     private string TranslateToPointDescription(int point)

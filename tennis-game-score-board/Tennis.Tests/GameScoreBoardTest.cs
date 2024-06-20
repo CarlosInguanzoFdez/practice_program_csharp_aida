@@ -63,4 +63,17 @@ public class GameScoreBoardTest
         _notifier.Received(1).Notify("Forty Love");
         _notifier.Received(1).Notify("Player 1 has won!!\nIt was a nice game.\nBye now!");
     }
+
+    [Test]
+    public void finish_game_when_player2_win_all_points_consecutives()
+    {
+        _reader.Read().Returns(Player2Scored, Player2Scored, Player2Scored, Player2Scored, EndGame);
+
+        _gameScoreBoard.StartGame();
+
+        _notifier.Received(1).Notify("Love Fifteen");
+        _notifier.Received(1).Notify("Love Thirty");
+        _notifier.Received(1).Notify("Love Forty");
+        _notifier.Received(1).Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
+    }
 }
