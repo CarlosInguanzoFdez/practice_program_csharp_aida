@@ -13,31 +13,36 @@ public class Game
 
     public void AddPointForPlayer1()
     {
-        _player1._points++;
+        _player1.PointWon();
     }
 
     public void AddPointForPlayer2()
     {
-        _player2._points++;
+        _player2.PointWon();
     }
-
 
     public string GetScore()
     {
-        if (_player1._points == 1 && _player2._points == 0) {
-            return "Fifteen Love";
-        }
+        return $"{TranslateToPointDescription(_player1.Points)} {TranslateToPointDescription(_player2.Points)}";
+    }
 
-        if (_player1._points == 0 && _player2._points == 1)
+    private string TranslateToPointDescription(int point)
+    {
+        if (point == 0)
         {
-            return "Love Fifteen";
+            return "Love";
         }
-
-        if (_player1._points == 2 && _player2._points == 0)
+        
+        if (point == 1)
         {
-            return "Thirty Love";
+            return "Fifteen";
         }
-
-        return "xxx";
+        
+        if (point == 2)
+        {
+            return "Thirty";
+        }
+        
+        return "Forty";
     }
 }

@@ -8,4 +8,10 @@ public class Player
     {
         _points = 0;
     }
+    public int Points => _points;
+
+    public int PointWon()
+    {
+        return _points++;
+    }
 }
