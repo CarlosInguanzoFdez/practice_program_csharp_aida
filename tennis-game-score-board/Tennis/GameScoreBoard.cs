@@ -15,31 +15,26 @@ public class GameScoreBoard
 
     public void StartGame()
     {
-        var refereeInput = ReadRefereeInput();
+        while (true)
+        {
+            var refereeInput = ReadRefereeInput();
 
-        if (refereeInput == "$ score 1") {
-            _game.AddPointForPlayer1();
+            if (refereeInput == "$ score 1") 
+            {
+                _game.AddPointForPlayer1();
+            }
+            else
+            {
+                _game.AddPointForPlayer2();
+            }
+
+            Print(_game.GetScore());
+
+            if (refereeInput == "Exit")
+            {
+                return;
+            }
         }
-        else {
-            _game.AddPointForPlayer2();
-        }
-
-        Print(_game.GetScore());
-
-        refereeInput = ReadRefereeInput();
-
-        if (refereeInput == "Exit") {
-            return;
-        }
-
-        if (refereeInput == "$ score 1") {
-            _game.AddPointForPlayer1();
-        }
-        else {
-            _game.AddPointForPlayer2();
-        }
-
-        Print(_game.GetScore());
     }
 
     private void Print(string scoreBoard)
