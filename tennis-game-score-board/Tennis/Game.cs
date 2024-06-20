@@ -33,6 +33,16 @@ public class Game
             return MessageForWinner("Player 2");
         }
 
+        return CurrentScore();
+    }
+
+    public bool IsFinish()
+    {
+        return _player1.Win() || _player2.Win();
+    }
+
+    private string CurrentScore()
+    {
         return $"{TranslateToPointDescription(_player1.Points)} {TranslateToPointDescription(_player2.Points)}";
     }
 
@@ -59,10 +69,5 @@ public class Game
         }
 
         return "Forty";
-    }
-
-    public bool IsFinish()
-    {
-        return _player1.Win() || _player2.Win();
     }
 }
