@@ -7,19 +7,20 @@ public class Game
 
     public Game(string player1, string player2)
     {
-        _player1 = new Player(player1);
-        _player2 = new Player(player2);
+        _player1 = new Player();
+        _player2 = new Player();
     }
 
-    public void AddPointForPlayer(string player)
+    public void AddPointForPlayer1()
     {
-        if (player == _player1._name) {
-            _player1._points++;
-            return;
-        }
+        _player1._points++;
+    }
 
+    public void AddPointForPlayer2()
+    {
         _player2._points++;
     }
+
 
     public string GetScore()
     {

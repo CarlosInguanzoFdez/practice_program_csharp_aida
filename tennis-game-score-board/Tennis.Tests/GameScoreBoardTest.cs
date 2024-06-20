@@ -41,7 +41,7 @@ public class GameScoreBoardTest
 
     [Ignore("")]
     [Test]
-    public void score_board_is_thirty_love_when_scoreboard_is_fifteen_love_and_player1_has_scored()
+    public void score_board_is_fifteen_love_when_start_match_and_player1_has_scored_two_points_consecutives()
     {
         _reader.Read().Returns(Player1Scored);
 

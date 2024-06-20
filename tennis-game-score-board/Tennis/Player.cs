@@ -2,12 +2,10 @@ namespace Tennis;
 
 public class Player
 {
-    public readonly string _name;
     public int _points;
 
-    public Player(string name)
+    public Player()
     {
-        _name = name;
         _points = 0;
     }
 }

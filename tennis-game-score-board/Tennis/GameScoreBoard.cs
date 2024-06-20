@@ -20,10 +20,10 @@ public class GameScoreBoard
         var refereeInput = ReadRefereeInput();
 
         if (refereeInput == "$ score 1") {
-            _game.AddPointForPlayer(PlayerName1);
+            _game.AddPointForPlayer1();
         }
         else {
-            _game.AddPointForPlayer(PlayerName2);
+            _game.AddPointForPlayer2();
         }
 
         var score = _game.GetScore();
