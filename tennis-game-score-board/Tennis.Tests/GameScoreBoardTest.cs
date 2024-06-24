@@ -64,7 +64,6 @@ public class GameScoreBoardTest
         _notifier.Received(8).Notify(Arg.Any<string>());
     }
 
-    [Ignore("")]
     [Test]
     public void score_is_deuce_and_then_player2_win_with_two_advantages()
     {
@@ -77,10 +76,8 @@ public class GameScoreBoardTest
         _notifier.Received(1).Notify("Fifteen Thirty");
         _notifier.Received(1).Notify("Thirty Thirty");
         _notifier.Received(1).Notify("Forty Thirty");
-        _notifier.Received(1).Notify("Deuce");
-        _notifier.Received(1).Notify("Forty Advantage");
-        _notifier.Received(1).Notify("Deuce");
-        _notifier.Received(1).Notify("Forty Advantage");
+        _notifier.Received(2).Notify("Deuce");
+        _notifier.Received(2).Notify("Forty Advantage");
         _notifier.Received(1).Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
         _notifier.Received(10).Notify(Arg.Any<string>());
     }
