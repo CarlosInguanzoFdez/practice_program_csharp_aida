@@ -46,10 +46,10 @@ public class GameScoreBoardTest
 
         Received.InOrder(() =>
         {
-            _notifier.Received(1).Notify("Love Fifteen");
-            _notifier.Received(1).Notify("Love Thirty");
-            _notifier.Received(1).Notify("Love Forty");
-            _notifier.Received(1).Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
+            _notifier.Received().Notify("Love Fifteen");
+            _notifier.Received().Notify("Love Thirty");
+            _notifier.Received().Notify("Love Forty");
+            _notifier.Received().Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
         });
         _notifier.Received(4).Notify(Arg.Any<string>());
     }
@@ -63,14 +63,14 @@ public class GameScoreBoardTest
 
         Received.InOrder(() =>
         {
-            _notifier.Received(1).Notify("Love Fifteen");
-            _notifier.Received(1).Notify("Fifteen Fifteen");
-            _notifier.Received(1).Notify("Fifteen Thirty");
-            _notifier.Received(1).Notify("Thirty Thirty");
-            _notifier.Received(1).Notify("Forty Thirty");
-            _notifier.Received(1).Notify("Deuce");
-            _notifier.Received(1).Notify("Advantage Forty");
-            _notifier.Received(1).Notify("Player 1 has won!!\nIt was a nice game.\nBye now!");
+            _notifier.Received().Notify("Love Fifteen");
+            _notifier.Received().Notify("Fifteen Fifteen");
+            _notifier.Received().Notify("Fifteen Thirty");
+            _notifier.Received().Notify("Thirty Thirty");
+            _notifier.Received().Notify("Forty Thirty");
+            _notifier.Received().Notify("Deuce");
+            _notifier.Received().Notify("Advantage Forty");
+            _notifier.Received().Notify("Player 1 has won!!\nIt was a nice game.\nBye now!");
         });
         _notifier.Received(8).Notify(Arg.Any<string>());
     }
@@ -84,16 +84,16 @@ public class GameScoreBoardTest
 
         Received.InOrder(() =>
         {
-            _notifier.Received(1).Notify("Love Fifteen");
-            _notifier.Received(1).Notify("Fifteen Fifteen");
-            _notifier.Received(1).Notify("Fifteen Thirty");
-            _notifier.Received(1).Notify("Thirty Thirty");
-            _notifier.Received(1).Notify("Forty Thirty");
-            _notifier.Received(1).Notify("Deuce");
-            _notifier.Received(1).Notify("Forty Advantage");
-            _notifier.Received(1).Notify("Deuce");
-            _notifier.Received(1).Notify("Forty Advantage");
-            _notifier.Received(1).Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
+            _notifier.Received().Notify("Love Fifteen");
+            _notifier.Received().Notify("Fifteen Fifteen");
+            _notifier.Received().Notify("Fifteen Thirty");
+            _notifier.Received().Notify("Thirty Thirty");
+            _notifier.Received().Notify("Forty Thirty");
+            _notifier.Received().Notify("Deuce");
+            _notifier.Received().Notify("Forty Advantage");
+            _notifier.Received().Notify("Deuce");
+            _notifier.Received().Notify("Forty Advantage");
+            _notifier.Received().Notify("Player 2 has won!!\nIt was a nice game.\nBye now!");
         });
         _notifier.Received(10).Notify(Arg.Any<string>());
     }
