@@ -9,22 +9,26 @@ public class InspirationQuoteClient
     private readonly EmployeeRepository _employeeRepository;
     private readonly Notifier _notifier;
     private readonly QuoteService _quoteService;
+    private readonly RandomItemGenerator _randomItemGenerator;
 
-    public InspirationQuoteClient(EmployeeRepository employeeRepository, Notifier notifier, QuoteService quoteService)
+    public InspirationQuoteClient(EmployeeRepository employeeRepository, Notifier notifier, QuoteService quoteService,
+        RandomItemGenerator randomItemGenerator)
     {
         _employeeRepository = employeeRepository;
         _notifier = notifier;
         _quoteService = quoteService;
+        _randomItemGenerator = randomItemGenerator;
     }
 
     public void InspireSomenone(string word)
     {
         var quotes = _quoteService.Get(word);
-        var randomQuote = new Random().Next(quotes.Count);
+        var indexQuote = _randomItemGenerator.Get(quotes.Count - 1);
+        //var randomQuote = new Random().Next(quotes.Count);
 
         var employees = _employeeRepository.GetAll();
         var employeeSelected = employees.First();
 
-        _notifier.Notify(quotes[randomQuote], employeeSelected);
+        _notifier.Notify(quotes[indexQuote], employeeSelected);
     }
 }

@@ -11,6 +11,7 @@ public class InspirationOfTheDayTest
     private EmployeeRepository _employeeRepository;
     private QuoteService _quoteService;
     private InspirationQuoteClient _inspirationQuoteClient;
+    private RandomItemGenerator _randomItemGenerator;
 
     [SetUp]
     public void Setup()
@@ -18,7 +19,8 @@ public class InspirationOfTheDayTest
         _notifier = Substitute.For<Notifier>();
         _employeeRepository = Substitute.For<EmployeeRepository>();
         _quoteService = Substitute.For<QuoteService>();
-        _inspirationQuoteClient = new InspirationQuoteClient(_employeeRepository, _notifier, _quoteService);
+        _randomItemGenerator = Substitute.For<RandomItemGenerator>();
+        _inspirationQuoteClient = new InspirationQuoteClient(_employeeRepository, _notifier, _quoteService, _randomItemGenerator);
     }
 
     [Test]
@@ -29,6 +31,7 @@ public class InspirationOfTheDayTest
         var employeeSelected = new Employee(mobile);
         var employees = new List<Employee> { employeeSelected };
         _quoteService.Get(inputWord).Returns(new List<string>() { "Es simple: solo haz que pase" });
+        _randomItemGenerator.Get(Arg.Any<int>()).Returns(0);
         _employeeRepository.GetAll().Returns(employees);
 
         _inspirationQuoteClient.InspireSomenone(inputWord);
@@ -36,7 +39,6 @@ public class InspirationOfTheDayTest
         _notifier.Received(1).Notify("Es simple: solo haz que pase", employeeSelected);
     }
 
-    [Ignore("")]
     [Test]
     public void get_random_quote_and_notify_the_unique_employee()
     {
@@ -45,6 +47,7 @@ public class InspirationOfTheDayTest
         var employeeSelected = new Employee(mobile);
         var employees = new List<Employee> { employeeSelected };
         _quoteService.Get(inputWord).Returns(new List<string>() { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
+        _randomItemGenerator.Get(Arg.Any<int>()).Returns(0);
         _employeeRepository.GetAll().Returns(employees);
 
         _inspirationQuoteClient.InspireSomenone(inputWord);
