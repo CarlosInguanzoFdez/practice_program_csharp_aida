@@ -24,11 +24,10 @@ public class InspirationQuoteClient
     {
         var quotes = _quoteService.Get(word);
         var indexQuote = _randomItemGenerator.Get(quotes.Count - 1);
-        //var randomQuote = new Random().Next(quotes.Count);
-
+        new Random().Next(quotes.Count);
         var employees = _employeeRepository.GetAll();
-        var employeeSelected = employees.First();
+        var indexEmployee = _randomItemGenerator.Get(employees.Count - 1);
 
-        _notifier.Notify(quotes[indexQuote], employeeSelected);
+        _notifier.Notify(quotes[indexQuote], employees[indexEmployee]);
     }
 }

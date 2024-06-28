@@ -55,6 +55,24 @@ public class InspirationOfTheDayTest
         _notifier.Received(1).Notify("Es simple: solo haz que pase", employeeSelected);
     }
 
+    [Test]
+    public void get_random_quote_and_notify_random_employee()
+    {
+        var inputWord = "simple";
+        var aMobile = "656874112";
+        var anEmployee = new Employee(aMobile);
+        var otherMobile = "666123444";
+        var otherEmployee = new Employee(otherMobile);
+        var employees = new List<Employee> { anEmployee , otherEmployee };
+        _quoteService.Get(inputWord).Returns(new List<string>() { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
+        _randomItemGenerator.Get(Arg.Any<int>()).Returns(0, 1);
+        _employeeRepository.GetAll().Returns(employees);
+
+        _inspirationQuoteClient.InspireSomenone(inputWord);
+
+        _notifier.Received(1).Notify("Es simple: solo haz que pase", otherEmployee);
+    }
+
     /*
      Casos opss:
         - No se obtiene ningún empleado del repositorio
