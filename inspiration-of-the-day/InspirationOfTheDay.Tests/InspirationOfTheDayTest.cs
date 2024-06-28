@@ -12,15 +12,24 @@ public class InspirationOfTheDayTest
 
 
     [Test]
-    public void Fix_Me_And_Rename_Me()
+    public void get_random_quote_and_notify_employee()
     {
         _notifier = Substitute.For<Notifier>();
         _employeeRepository = Substitute.For<EmployeeRepository>();
         _quoteService = Substitute.For<QuoteService>();
-        _inspirationQuoteClient = Substitute.For<InspirationQuoteClient>();
+        _inspirationQuoteClient = new InspirationQuoteClient(_employeeRepository, _notifier, _quoteService);
+        _employeeRepository.Get().Returns(new Employee("656874112"));
 
         _inspirationQuoteClient.InspireSomenone("avanzando");
 
-        Assert.That(false, Is.True);
+        _quoteService.Received(1).Get("avanzando");
+        _notifier.Received(1).Notify("Si no puedes volar, corre; si no puedes correr, camina; si no puedes caminar, gatea, pero sigue avanzando hacia tu meta");
     }
+
+    /*
+     Casos opss:
+        - No se obtiene ningún empleado del repositorio
+        - No se obtiene ninguna cita del servicio web
+        - Un fallo en el envio del whatssap
+     */
 }

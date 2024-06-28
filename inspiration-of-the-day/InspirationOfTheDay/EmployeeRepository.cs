@@ -5,6 +5,4 @@ public interface EmployeeRepository
     Employee Get();
 }
 
-public class Employee
-{
-}
+public record Employee(string mobile);
