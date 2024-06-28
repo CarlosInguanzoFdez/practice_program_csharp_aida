@@ -35,7 +35,7 @@ public class InspirationOfTheDayTest
         _employeeRepository.GetAll().Returns(employees);
 
         _inspirationQuoteClient.InspireSomenone(inputWord);
-        
+
         _notifier.Received(1).Notify("Es simple: solo haz que pase", employeeSelected);
     }
 
@@ -46,7 +46,8 @@ public class InspirationOfTheDayTest
         var mobile = "656874112";
         var employeeSelected = new Employee(mobile);
         var employees = new List<Employee> { employeeSelected };
-        _quoteService.Get(inputWord).Returns(new List<string>() { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
+        _quoteService.Get(inputWord).Returns(new List<string>()
+            { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
         _randomItemGenerator.Get(Arg.Any<int>()).Returns(0);
         _employeeRepository.GetAll().Returns(employees);
 
@@ -59,12 +60,12 @@ public class InspirationOfTheDayTest
     public void get_random_quote_and_notify_random_employee()
     {
         var inputWord = "simple";
-        var aMobile = "656874112";
-        var anEmployee = new Employee(aMobile);
-        var otherMobile = "666123444";
-        var otherEmployee = new Employee(otherMobile);
-        var employees = new List<Employee> { anEmployee , otherEmployee };
-        _quoteService.Get(inputWord).Returns(new List<string>() { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
+        var anEmployee = new Employee("656874112");
+        var otherEmployee = new Employee("666123444");
+        var anotherEmployee = new Employee("689321444");
+        var employees = new List<Employee> { anEmployee, otherEmployee, anotherEmployee };
+        _quoteService.Get(inputWord).Returns(new List<string>()
+            { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
         _randomItemGenerator.Get(Arg.Any<int>()).Returns(0, 1);
         _employeeRepository.GetAll().Returns(employees);
 
@@ -72,11 +73,4 @@ public class InspirationOfTheDayTest
 
         _notifier.Received(1).Notify("Es simple: solo haz que pase", otherEmployee);
     }
-
-    /*
-     Casos opss:
-        - No se obtiene ningún empleado del repositorio
-        - No se obtiene ninguna cita del servicio web
-        - Un fallo en el envio del whatssap
-     */
 }

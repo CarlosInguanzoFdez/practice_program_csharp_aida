@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -22,12 +23,23 @@ public class InspirationQuoteClient
 
     public void InspireSomenone(string word)
     {
-        var quotes = _quoteService.Get(word);
-        var indexQuote = _randomItemGenerator.Get(quotes.Count - 1);
-        new Random().Next(quotes.Count);
+        var quoteSelected = GetQuote(word);
+        var employeeSelected = GetEmployee();
+
+        _notifier.Notify(quoteSelected, employeeSelected);
+    }
+
+    private Employee GetEmployee()
+    {
         var employees = _employeeRepository.GetAll();
         var indexEmployee = _randomItemGenerator.Get(employees.Count - 1);
+        return employees[indexEmployee];
+    }
 
-        _notifier.Notify(quotes[indexQuote], employees[indexEmployee]);
+    private string GetQuote(string word)
+    {
+        var quotes = _quoteService.Get(word);
+        var indexQuote = _randomItemGenerator.Get(quotes.Count - 1);
+        return quotes[indexQuote];
     }
 }
