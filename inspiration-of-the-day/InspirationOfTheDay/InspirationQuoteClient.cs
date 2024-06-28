@@ -1,4 +1,6 @@
+using System;
 using System.Drawing;
+using System.Linq;
 
 namespace InspirationOfTheDay;
 
@@ -17,7 +19,12 @@ public class InspirationQuoteClient
 
     public void InspireSomenone(string word)
     {
-        _quoteService.Get(word);
-        _notifier.Notify("Si no puedes volar, corre; si no puedes correr, camina; si no puedes caminar, gatea, pero sigue avanzando hacia tu meta");
+        var quotes = _quoteService.Get(word);
+        var randomQuote = new Random().Next(quotes.Count);
+
+        var employees = _employeeRepository.GetAll();
+        var employeeSelected = employees.First();
+
+        _notifier.Notify(quotes[randomQuote], employeeSelected);
     }
 }

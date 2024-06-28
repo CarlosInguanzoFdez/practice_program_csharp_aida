@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace InspirationOfTheDay;
 
 public interface QuoteService
 {
-    void Get(string word);
+    List<string> Get(string word);
 }
