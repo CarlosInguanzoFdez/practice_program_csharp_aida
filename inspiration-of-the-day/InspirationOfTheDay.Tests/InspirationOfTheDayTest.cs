@@ -10,14 +10,18 @@ public class InspirationOfTheDayTest
     private QuoteService _quoteService;
     private InspirationQuoteClient _inspirationQuoteClient;
 
-
-    [Test]
-    public void get_random_quote_and_notify_employee()
+    [SetUp]
+    public void Setup()
     {
         _notifier = Substitute.For<Notifier>();
         _employeeRepository = Substitute.For<EmployeeRepository>();
         _quoteService = Substitute.For<QuoteService>();
         _inspirationQuoteClient = new InspirationQuoteClient(_employeeRepository, _notifier, _quoteService);
+    }
+
+    [Test]
+    public void get_random_quote_and_notify_employee()
+    {
         _employeeRepository.Get().Returns(new Employee("656874112"));
 
         _inspirationQuoteClient.InspireSomenone("avanzando");
