@@ -22,7 +22,7 @@ public class InspirationOfTheDayTest
     }
 
     [Test]
-    public void get_random_quote_and_notify_employee()
+    public void get_the_unique_quote_and_notify_unique_employee()
     {
         var inputWord = "simple";
         var mobile = "656874112";
@@ -33,6 +33,22 @@ public class InspirationOfTheDayTest
 
         _inspirationQuoteClient.InspireSomenone(inputWord);
         
+        _notifier.Received(1).Notify("Es simple: solo haz que pase", employeeSelected);
+    }
+
+    [Ignore("")]
+    [Test]
+    public void get_random_quote_and_notify_the_unique_employee()
+    {
+        var inputWord = "simple";
+        var mobile = "656874112";
+        var employeeSelected = new Employee(mobile);
+        var employees = new List<Employee> { employeeSelected };
+        _quoteService.Get(inputWord).Returns(new List<string>() { "Es simple: solo haz que pase", "Todo es mas simple de lo que parece" });
+        _employeeRepository.GetAll().Returns(employees);
+
+        _inspirationQuoteClient.InspireSomenone(inputWord);
+
         _notifier.Received(1).Notify("Es simple: solo haz que pase", employeeSelected);
     }
 
